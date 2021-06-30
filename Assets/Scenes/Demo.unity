@@ -182,26 +182,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Terrain: {fileID: 339721986}
   Layers:
-  - Name: Grass
-    DiffuseMap: {fileID: 2800000, guid: 7f3df385222f5b1428f6a156037deb5e, type: 3}
-    NormalMap: {fileID: 2800000, guid: 1ff4687a05ada474ca7eaf3010a871f6, type: 3}
-    TextureTileSize: {x: 10, y: 10}
+  - Name: Dirt
+    Layer: {fileID: 8574412962073106934, guid: c25f012d8eaba684b9a392d71f427372, type: 2}
     MinHeight: 0
     MaxHeight: 250
     MinAngle: 0
     MaxAngle: 90
   - Name: Rocks
-    DiffuseMap: {fileID: 2800000, guid: f7dd726c93b8f17418ea3be3f6768909, type: 3}
-    NormalMap: {fileID: 2800000, guid: f45c3bd09301cc64783afc31dfca026b, type: 3}
-    TextureTileSize: {x: 10, y: 10}
-    MinHeight: 0
+    Layer: {fileID: 8574412962073106934, guid: 716937fe861ba6748bfd599e6802e70a, type: 2}
+    MinHeight: 50
     MaxHeight: 250
-    MinAngle: 30
+    MinAngle: 35
     MaxAngle: 90
   - Name: Snow
-    DiffuseMap: {fileID: 2800000, guid: 0cc0777f7d4a3444380eb084d74396b5, type: 3}
-    NormalMap: {fileID: 2800000, guid: 52f2b70b42682a145b20ea5f04fd6af1, type: 3}
-    TextureTileSize: {x: 10, y: 10}
+    Layer: {fileID: 8574412962073106934, guid: 34a7124a250b6314f803cba5555e7faa, type: 2}
     MinHeight: 150
     MaxHeight: 250
     MinAngle: 0

@@ -9,13 +9,11 @@ namespace Splatter {
         public List<SplatterLayer> Layers;
 
         public void Run() {
-            var layers = new TerrainLayer[Layers.Count];
+            var terrainLayers = Layers
+                .Select(i => i.Layer)
+                .ToArray();
 
-            for (int i = 0; i < Layers.Count; i++) {
-                layers[i] = CreateTerrainLayer(Layers[i]);
-            }
-
-            Terrain.terrainData.SetTerrainLayersRegisterUndo(layers, "Add terrain layer");
+            Terrain.terrainData.SetTerrainLayersRegisterUndo(terrainLayers, "Add terrain layer");
 
             Splat();
 
@@ -69,16 +67,6 @@ namespace Splatter {
             }
 
             terrainData.SetAlphamaps(0, 0, splatmapData);
-        }
-
-        private TerrainLayer CreateTerrainLayer(SplatterLayer layer) {
-            return new TerrainLayer {
-                name = layer.Name,
-                diffuseTexture = layer.DiffuseMap,
-                normalMapTexture = layer.NormalMap,
-                tileSize = layer.TextureTileSize,
-                tileOffset = Vector2.zero,
-            };
         }
     }
 }
