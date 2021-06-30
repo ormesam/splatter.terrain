@@ -192,11 +192,11 @@ MonoBehaviour:
     Layer: {fileID: 8574412962073106934, guid: 716937fe861ba6748bfd599e6802e70a, type: 2}
     MinHeight: 50
     MaxHeight: 250
-    MinAngle: 35
+    MinAngle: 25
     MaxAngle: 90
   - Name: Snow
     Layer: {fileID: 8574412962073106934, guid: 34a7124a250b6314f803cba5555e7faa, type: 2}
-    MinHeight: 150
+    MinHeight: 100
     MaxHeight: 250
     MinAngle: 0
     MaxAngle: 30
