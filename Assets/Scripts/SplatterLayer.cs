@@ -6,9 +6,9 @@ namespace Splatter {
     public class SplatterLayer {
         public string Name;
         public TerrainLayer Layer;
-        public int MinHeight;
-        public int MaxHeight;
-        public int MinAngle = 0;
-        public int MaxAngle = 90;
+        public float MinHeight = 0;
+        public float MaxHeight = Mathf.Infinity;
+        public float MinAngle = 0;
+        public float MaxAngle = 90;
     }
 }
