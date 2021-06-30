@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -34,18 +35,35 @@ namespace Splatter {
 
                     float height = terrainData.GetHeight(Mathf.RoundToInt(y_01 * terrainData.heightmapResolution), Mathf.RoundToInt(x_01 * terrainData.heightmapResolution));
 
-                    if (height > 200) {
-                        splatmapData[x, y, 0] = 0;
-                        splatmapData[x, y, 1] = 0;
-                        splatmapData[x, y, 2] = 1;
-                    } else if (height > 150) {
-                        splatmapData[x, y, 0] = 0;
-                        splatmapData[x, y, 1] = 1;
-                        splatmapData[x, y, 2] = 0;
-                    } else {
-                        splatmapData[x, y, 0] = 1;
-                        splatmapData[x, y, 1] = 0;
-                        splatmapData[x, y, 2] = 0;
+                    // Tthis is in normalised coordinates relative to the overall terrain dimensions
+                    Vector3 normal = terrainData.GetInterpolatedNormal(y_01, x_01);
+
+                    float steepness = terrainData.GetSteepness(y_01, x_01);
+
+                    float[] splatWeights = new float[terrainData.alphamapLayers];
+
+                    for (int i = 0; i < Layers.Count; i++) {
+                        var layer = Layers[i];
+
+                        bool isHeightValid = height >= layer.MinHeight && height <= layer.MaxHeight;
+                        bool isSteepnessValid = steepness >= layer.MinAngle && steepness <= layer.MaxAngle;
+
+                        if (isHeightValid && isSteepnessValid) {
+                            splatWeights[i] = 1;
+                        } else {
+                            splatWeights[i] = 0;
+                        }
+                    }
+
+                    // Sum of all textures weights must add to 1, so calculate normalization factor from sum of weights
+                    float z = splatWeights.Sum();
+
+                    for (int i = 0; i < terrainData.alphamapLayers; i++) {
+                        // Normalize so that sum of all texture weights = 1
+                        splatWeights[i] /= z;
+
+                        // Assign this point to the splatmap array
+                        splatmapData[x, y, i] = splatWeights[i];
                     }
                 }
             }
