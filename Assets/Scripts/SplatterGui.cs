@@ -1,10 +1,38 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
 namespace Splatter.Assets.Scripts {
-    [ExecuteInEditMode]
-    public class SplatterGui : MonoBehaviour {
+    [CustomEditor(typeof(Splatter), true), CanEditMultipleObjects]
+    public class SplatterGui : Editor {
+        private Splatter splatter;
+
         private void OnEnable() {
-            GetComponent<Splatter>().Run();
+            splatter = target as Splatter;
+        }
+
+        public override void OnInspectorGUI() {
+            DrawDefaultInspector();
+
+            if (GUI.Button(CreateButtonControl(), "Clear")) {
+                splatter.Clear();
+            }
+
+            EditorGUILayout.Space();
+
+            if (GUI.Button(CreateButtonControl(), "Splat!")) {
+                splatter.Splat();
+            }
+        }
+
+        private Rect CreateButtonControl() {
+            var rect = EditorGUILayout.GetControlRect();
+
+            rect.x += 2;
+            rect.y += 1;
+            rect.width -= 4;
+            rect.height += 5;
+
+            return rect;
         }
     }
 }

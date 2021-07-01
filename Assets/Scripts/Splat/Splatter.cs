@@ -8,19 +8,25 @@ namespace Splatter {
         public Terrain Terrain;
         public List<SplatterLayer> Layers;
 
-        public void Run() {
+        public void Splat() {
             var terrainLayers = Layers
                 .Select(i => i.Layer)
                 .ToArray();
 
             Terrain.terrainData.SetTerrainLayersRegisterUndo(terrainLayers, "Add terrain layer");
 
-            Splat();
+            SplatTerrain();
 
             EditorUtility.SetDirty(Terrain);
         }
 
-        private void Splat() {
+        public void Clear() {
+            Terrain.terrainData.SetTerrainLayersRegisterUndo(new TerrainLayer[0], "Remove terrain layers");
+
+            EditorUtility.SetDirty(Terrain);
+        }
+
+        private void SplatTerrain() {
             TerrainData terrainData = Terrain.terrainData;
 
             float[,,] splatmapData = new float[terrainData.alphamapWidth, terrainData.alphamapHeight, terrainData.alphamapLayers];

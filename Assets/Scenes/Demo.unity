@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 234182514}
   - component: {fileID: 234182516}
-  - component: {fileID: 234182515}
   m_Layer: 0
   m_Name: Splatter
   m_TagString: Untagged
@@ -156,18 +155,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &234182515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 234182513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b44992ac3da036488a60251b4a06f89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &234182516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,19 +172,19 @@ MonoBehaviour:
   - Name: Dirt
     Layer: {fileID: 8574412962073106934, guid: c25f012d8eaba684b9a392d71f427372, type: 2}
     MinHeight: 0
-    MaxHeight: 250
+    MaxHeight: 200
     MinAngle: 0
     MaxAngle: 90
   - Name: Rocks
     Layer: {fileID: 8574412962073106934, guid: 716937fe861ba6748bfd599e6802e70a, type: 2}
     MinHeight: 50
-    MaxHeight: 250
+    MaxHeight: 200
     MinAngle: 25
     MaxAngle: 90
   - Name: Snow
     Layer: {fileID: 8574412962073106934, guid: 34a7124a250b6314f803cba5555e7faa, type: 2}
     MinHeight: 100
-    MaxHeight: 250
+    MaxHeight: 200
     MinAngle: 0
     MaxAngle: 30
 --- !u!1 &339721983
