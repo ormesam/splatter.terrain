@@ -198,7 +198,7 @@ MonoBehaviour:
     MinHeight: 100
     MaxHeight: 200
     MinAngle: 0
-    MaxAngle: 30
+    MaxAngle: 35
 --- !u!1 &339721983
 GameObject:
   m_ObjectHideFlags: 0
