@@ -1,13 +1,18 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Splatter {
     public class Splatter : MonoBehaviour {
         public Terrain Terrain;
         public List<SplatterLayer> Layers;
+
+#if UNITY_EDITOR
 
         public void Splat() {
             var terrainLayers = CreateLayers();
@@ -111,5 +116,6 @@ namespace Splatter {
 
             terrainData.SetAlphamaps(0, 0, splatmapData);
         }
+#endif
     }
 }
