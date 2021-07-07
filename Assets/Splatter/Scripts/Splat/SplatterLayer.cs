@@ -19,5 +19,8 @@ namespace Splatter {
 
         [Range(0, 90)]
         public float MaxAngle = 90;
+
+        [Range(0, 1)]
+        public float Weight = 1;
     }
 }

@@ -95,7 +95,7 @@ namespace Splatter {
                         bool isSteepnessValid = steepness >= layer.MinAngle && steepness <= layer.MaxAngle;
 
                         if (isHeightValid && isSteepnessValid) {
-                            splatWeights[i] = 1;
+                            splatWeights[i] = layer.Weight;
                         } else {
                             splatWeights[i] = 0;
                         }
