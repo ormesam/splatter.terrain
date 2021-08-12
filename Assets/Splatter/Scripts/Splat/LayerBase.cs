@@ -8,7 +8,6 @@ namespace Splatter {
         public Texture2D Normal;
         public Texture2D Mask;
         public Vector2 TileSize = Vector2.one;
-        public Vector2 TileOffset = Vector2.zero;
 
         public virtual bool MeetsCriteria(TerrainData terrainData, float x, float y) {
             return true;

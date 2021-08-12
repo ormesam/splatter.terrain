@@ -67,7 +67,6 @@ namespace Splatter {
                 diffuseTexture = layer.Texture,
                 maskMapTexture = layer.Mask,
                 normalMapTexture = layer.Normal,
-                tileOffset = layer.TileOffset,
                 tileSize = layer.TileSize,
             };
         }
@@ -96,6 +95,10 @@ namespace Splatter {
         }
 
         private void SplatLayer(TerrainData terrainData, float[,,] splatmapData, LayerBase layer) {
+            if (!layer.Texture) {
+                return;
+            }
+
             int layerIdx = GetLayerIndex(layer);
 
             for (int width = 0; width < terrainData.alphamapWidth; width++) {
