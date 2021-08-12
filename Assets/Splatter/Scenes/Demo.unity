@@ -173,13 +173,11 @@ MonoBehaviour:
     Normal: {fileID: 2800000, guid: 1ff4687a05ada474ca7eaf3010a871f6, type: 3}
     Mask: {fileID: 2800000, guid: 3c6d7b80bcc59ae448166eacd4ad79b0, type: 3}
     TileSize: {x: 10, y: 10}
-    TileOffset: {x: 0, y: 0}
   GroundLayers:
   - Texture: {fileID: 2800000, guid: 6bcc65b7c6e3a0b448d7801bfc56842f, type: 3}
     Normal: {fileID: 2800000, guid: dd1ad706663683546b665fd5b0286bbd, type: 3}
     Mask: {fileID: 2800000, guid: 58a4a6310bd23844bae88d82f7916059, type: 3}
     TileSize: {x: 10, y: 10}
-    TileOffset: {x: 0, y: 0}
     Name: Sand
     MinHeight: 0
     MaxHeight: 45
@@ -188,14 +186,12 @@ MonoBehaviour:
     Normal: {fileID: 2800000, guid: f45c3bd09301cc64783afc31dfca026b, type: 3}
     Mask: {fileID: 2800000, guid: 44f7e6aa71506b041ac0a60db8868a44, type: 3}
     TileSize: {x: 100, y: 100}
-    TileOffset: {x: 0, y: 0}
     MinAngle: 30
   SnowLayer:
     Texture: {fileID: 2800000, guid: 0cc0777f7d4a3444380eb084d74396b5, type: 3}
     Normal: {fileID: 2800000, guid: 1ff4687a05ada474ca7eaf3010a871f6, type: 3}
     Mask: {fileID: 2800000, guid: 3c6d7b80bcc59ae448166eacd4ad79b0, type: 3}
     TileSize: {x: 5, y: 5}
-    TileOffset: {x: 0, y: 0}
     MinHeight: 125
     MaxAngle: 30
 --- !u!1 &339721983
