@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using UnityEditor;
 using UnityEditor.Experimental.TerrainAPI;
 using UnityEngine;
@@ -220,3 +222,5 @@ namespace Splatter {
         }
     }
 }
+
+#endif

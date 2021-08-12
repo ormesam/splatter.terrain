@@ -10,7 +10,10 @@ using UnityEditor;
 namespace Splatter {
     public class Splatter : MonoBehaviour {
         public Terrain Terrain;
-        public List<SplatterLayer> Layers;
+        public LayerBase BaseLayer;
+        public List<GroundLayer> GroundLayers;
+        public SplatterCliff CliffLayer;
+        public SplatterSnow SnowLayer;
 
 #if UNITY_EDITOR
 
@@ -19,7 +22,7 @@ namespace Splatter {
 
             ReplaceLayerFiles(terrainLayers);
 
-            Terrain.terrainData.SetTerrainLayersRegisterUndo(terrainLayers, "Add terrain layer");
+            Terrain.terrainData.SetTerrainLayersRegisterUndo(terrainLayers, "Add terrain layers");
 
             SplatTerrain();
 
@@ -50,16 +53,23 @@ namespace Splatter {
         }
 
         private TerrainLayer[] CreateLayers() {
-            return Layers
-                .Select(i => new TerrainLayer {
-                    diffuseTexture = i.Texture,
-                    maskMapTexture = i.Mask,
-                    name = i.Name,
-                    normalMapTexture = i.Normal,
-                    tileOffset = i.TileOffset,
-                    tileSize = i.TileSize,
-                })
+            return GroundLayers
+                .Select(i => ConvertLayer(i.Name, i))
+                .Prepend(ConvertLayer("Base", BaseLayer))
+                .Append(ConvertLayer("Cliffs", CliffLayer))
+                .Append(ConvertLayer("Snow", SnowLayer))
                 .ToArray();
+        }
+
+        private TerrainLayer ConvertLayer(string name, LayerBase layer) {
+            return new TerrainLayer {
+                name = name,
+                diffuseTexture = layer.Texture,
+                maskMapTexture = layer.Mask,
+                normalMapTexture = layer.Normal,
+                tileOffset = layer.TileOffset,
+                tileSize = layer.TileSize,
+            };
         }
 
         public void Clear() {
@@ -73,48 +83,50 @@ namespace Splatter {
 
             float[,,] splatmapData = new float[terrainData.alphamapWidth, terrainData.alphamapHeight, terrainData.alphamapLayers];
 
-            for (int y = 0; y < terrainData.alphamapHeight; y++) {
-                for (int x = 0; x < terrainData.alphamapWidth; x++) {
-                    // Normalise x / y coordinates to range 0-1 
-                    float y1 = (float)y / terrainData.alphamapHeight;
-                    float x1 = (float)x / terrainData.alphamapWidth;
+            SplatLayer(terrainData, splatmapData, BaseLayer);
 
-                    float height = terrainData.GetHeight(Mathf.RoundToInt(y1 * terrainData.heightmapResolution), Mathf.RoundToInt(x1 * terrainData.heightmapResolution));
+            foreach (var layer in GroundLayers) {
+                SplatLayer(terrainData, splatmapData, layer);
+            }
 
-                    // Tthis is in normalised coordinates relative to the overall terrain dimensions
-                    Vector3 normal = terrainData.GetInterpolatedNormal(y1, x1);
+            SplatLayer(terrainData, splatmapData, CliffLayer);
+            SplatLayer(terrainData, splatmapData, SnowLayer);
 
-                    float steepness = terrainData.GetSteepness(y1, x1);
+            terrainData.SetAlphamaps(0, 0, splatmapData);
+        }
 
-                    float[] splatWeights = new float[terrainData.alphamapLayers];
+        private void SplatLayer(TerrainData terrainData, float[,,] splatmapData, LayerBase layer) {
+            int layerIdx = GetLayerIndex(layer);
 
-                    for (int i = 0; i < Layers.Count; i++) {
-                        var layer = Layers[i];
+            for (int width = 0; width < terrainData.alphamapWidth; width++) {
+                for (int height = 0; height < terrainData.alphamapHeight; height++) {
+                    // Normalise x / y coordinates to range 0 - 1
+                    float x = (float)height / terrainData.alphamapHeight;
+                    float y = (float)width / terrainData.alphamapWidth;
 
-                        bool isHeightValid = height >= layer.MinHeight && height <= layer.MaxHeight;
-                        bool isSteepnessValid = steepness >= layer.MinAngle && steepness <= layer.MaxAngle;
+                    if (layer.MeetsCriteria(terrainData, x, y)) {
+                        ClearOtherLayers(layerIdx, splatmapData, width, height);
 
-                        if (isHeightValid && isSteepnessValid) {
-                            splatWeights[i] = layer.Weight;
-                        } else {
-                            splatWeights[i] = 0;
-                        }
-                    }
-
-                    // Sum of all textures weights must add to 1, so calculate normalization factor from sum of weights
-                    float z = splatWeights.Sum();
-
-                    for (int i = 0; i < terrainData.alphamapLayers; i++) {
-                        // Normalize so that sum of all texture weights = 1
-                        splatWeights[i] /= z;
-
-                        // Assign this point to the splatmap array
-                        splatmapData[x, y, i] = splatWeights[i];
+                        splatmapData[width, height, layerIdx] = 1;
                     }
                 }
             }
+        }
 
-            terrainData.SetAlphamaps(0, 0, splatmapData);
+        private void ClearOtherLayers(int beforeIdx, float[,,] splatmapData, int x, int y) {
+            for (int i = 0; i < beforeIdx; i++) {
+                splatmapData[x, y, i] = 0;
+            }
+        }
+
+        public int GetLayerIndex(LayerBase layer) {
+            return GroundLayers
+                .Cast<LayerBase>()
+                .Prepend(BaseLayer)
+                .Append(CliffLayer)
+                .Append(SnowLayer)
+                .ToList()
+                .IndexOf(layer);
         }
 #endif
     }
