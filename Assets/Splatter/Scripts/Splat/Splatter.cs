@@ -1,7 +1,7 @@
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using System.Collections.Generic;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -9,16 +9,19 @@ using UnityEditor;
 
 namespace Splatter {
     public class Splatter : MonoBehaviour {
+        public string AssetPath = "Assets/Terrains/Layers";
         public Terrain Terrain;
-        public LayerBase BaseLayer;
-        public List<GroundLayer> GroundLayers;
-        public SplatterCliff CliffLayer;
-        public SplatterSnow SnowLayer;
+        public BaseLayer BaseLayer;
+        public WaterLayer WaterLayer;
+        public MountainLayer MountainLayer;
+        public SnowLayer SnowLayer;
+
+        private IList<LayerBase> allLayers;
 
 #if UNITY_EDITOR
 
         public void Splat() {
-            var terrainLayers = CreateLayers();
+            var terrainLayers = CreateAndSetLayers();
 
             ReplaceLayerFiles(terrainLayers);
 
@@ -41,7 +44,7 @@ namespace Splatter {
         }
 
         private string GetOrCreateFilePath() {
-            string folder = $"Assets/Splatter/TerrainLayers/{gameObject.scene.name}";
+            string folder = AssetPath + "/" + gameObject.scene.name;
 
             if (Directory.Exists(folder)) {
                 Directory.Delete(folder, true);
@@ -52,23 +55,17 @@ namespace Splatter {
             return folder;
         }
 
-        private TerrainLayer[] CreateLayers() {
-            return GroundLayers
-                .Select(i => ConvertLayer(i.Name, i))
-                .Prepend(ConvertLayer("Base", BaseLayer))
-                .Append(ConvertLayer("Cliffs", CliffLayer))
-                .Append(ConvertLayer("Snow", SnowLayer))
-                .ToArray();
-        }
-
-        private TerrainLayer ConvertLayer(string name, LayerBase layer) {
-            return new TerrainLayer {
-                name = name,
-                diffuseTexture = layer.Texture,
-                maskMapTexture = layer.Mask,
-                normalMapTexture = layer.Normal,
-                tileSize = layer.TileSize,
+        private TerrainLayer[] CreateAndSetLayers() {
+            allLayers = new List<LayerBase> {
+                BaseLayer,
+                WaterLayer,
+                MountainLayer,
+                SnowLayer,
             };
+
+            return allLayers
+                .Select(i => i.CreateLayer())
+                .ToArray();
         }
 
         public void Clear() {
@@ -83,13 +80,11 @@ namespace Splatter {
             float[,,] splatmapData = new float[terrainData.alphamapWidth, terrainData.alphamapHeight, terrainData.alphamapLayers];
 
             SplatLayer(terrainData, splatmapData, BaseLayer);
-
-            foreach (var layer in GroundLayers) {
-                SplatLayer(terrainData, splatmapData, layer);
-            }
-
-            SplatLayer(terrainData, splatmapData, CliffLayer);
+            SplatLayer(terrainData, splatmapData, WaterLayer);
+            SplatLayer(terrainData, splatmapData, MountainLayer);
             SplatLayer(terrainData, splatmapData, SnowLayer);
+
+            WaterLayer.UpdateWaterObjectIfRequired(Terrain);
 
             terrainData.SetAlphamaps(0, 0, splatmapData);
         }
@@ -99,7 +94,7 @@ namespace Splatter {
                 return;
             }
 
-            int layerIdx = GetLayerIndex(layer);
+            int layerIdx = allLayers.IndexOf(layer);
 
             for (int width = 0; width < terrainData.alphamapWidth; width++) {
                 for (int height = 0; height < terrainData.alphamapHeight; height++) {
@@ -107,7 +102,7 @@ namespace Splatter {
                     float x = (float)height / terrainData.alphamapHeight;
                     float y = (float)width / terrainData.alphamapWidth;
 
-                    if (layer.MeetsCriteria(terrainData, x, y)) {
+                    if (layer.MeetsCriteria(this, x, y)) {
                         ClearOtherLayers(layerIdx, splatmapData, width, height);
 
                         splatmapData[width, height, layerIdx] = 1;
@@ -120,16 +115,6 @@ namespace Splatter {
             for (int i = 0; i < beforeIdx; i++) {
                 splatmapData[x, y, i] = 0;
             }
-        }
-
-        public int GetLayerIndex(LayerBase layer) {
-            return GroundLayers
-                .Cast<LayerBase>()
-                .Prepend(BaseLayer)
-                .Append(CliffLayer)
-                .Append(SnowLayer)
-                .ToList()
-                .IndexOf(layer);
         }
 #endif
     }

@@ -132,6 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 102420614}
+  - component: {fileID: 102420615}
   m_Layer: 0
   m_Name: Mountain
   m_TagString: Untagged
@@ -154,6 +155,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &102420615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102420613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc14b5e68a982f74cbdb7d6e339c1c33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AssetPath: Assets/Terrains/Layers/Snow
+  Terrain: {fileID: 2053159416}
+  BaseLayer:
+    Texture: {fileID: 2800000, guid: badc4e58ab4c4de4fbc591540c5ccbe1, type: 3}
+    Normal: {fileID: 0}
+    Mask: {fileID: 0}
+    TileSize: {x: 1, y: 1}
+    Altitude: 1000
+    MaxAngle: 47.1
+  WaterLayer:
+    Texture: {fileID: 2800000, guid: 347057341653b8c4f9098cfa56734efc, type: 3}
+    Normal: {fileID: 0}
+    Mask: {fileID: 0}
+    TileSize: {x: 1, y: 1}
+    UseWater: 1
+    ResizeToTerrain: 0
+    WaterObject: {fileID: 0}
+    WaterHeight: 0
+    RiverbedHeight: 0.1
+  MountainLayer:
+    Texture: {fileID: 2800000, guid: 66bfffbfc1446e24dbf6081d20fc9daa, type: 3}
+    Normal: {fileID: 0}
+    Mask: {fileID: 0}
+    TileSize: {x: 1, y: 1}
+  SnowLayer:
+    Texture: {fileID: 0}
+    Normal: {fileID: 0}
+    Mask: {fileID: 0}
+    TileSize: {x: 1, y: 1}
+    UseSnow: 0
+    Altitude: 0
+    MaxAngle: 90
 --- !u!1 &234182513
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,32 +242,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc14b5e68a982f74cbdb7d6e339c1c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AssetPath: Assets/Terrains/Layers
   Terrain: {fileID: 0}
   BaseLayer:
-    Texture: {fileID: 2800000, guid: 7f3df385222f5b1428f6a156037deb5e, type: 3}
-    Normal: {fileID: 2800000, guid: 1ff4687a05ada474ca7eaf3010a871f6, type: 3}
-    Mask: {fileID: 2800000, guid: 3c6d7b80bcc59ae448166eacd4ad79b0, type: 3}
-    TileSize: {x: 10, y: 10}
-  GroundLayers:
-  - Texture: {fileID: 2800000, guid: 6bcc65b7c6e3a0b448d7801bfc56842f, type: 3}
-    Normal: {fileID: 2800000, guid: dd1ad706663683546b665fd5b0286bbd, type: 3}
-    Mask: {fileID: 2800000, guid: 58a4a6310bd23844bae88d82f7916059, type: 3}
-    TileSize: {x: 10, y: 10}
-    Name: Sand
-    MinHeight: 0
-    MaxHeight: 45
-  CliffLayer:
-    Texture: {fileID: 2800000, guid: f7dd726c93b8f17418ea3be3f6768909, type: 3}
-    Normal: {fileID: 2800000, guid: f45c3bd09301cc64783afc31dfca026b, type: 3}
-    Mask: {fileID: 2800000, guid: 44f7e6aa71506b041ac0a60db8868a44, type: 3}
-    TileSize: {x: 100, y: 100}
-    MinAngle: 30
+    Texture: {fileID: 0}
+    Normal: {fileID: 0}
+    Mask: {fileID: 0}
+    TileSize: {x: 1, y: 1}
+    Altitude: 0
+    MaxAngle: 45
+  WaterLayer:
+    Texture: {fileID: 0}
+    Normal: {fileID: 0}
+    Mask: {fileID: 0}
+    TileSize: {x: 1, y: 1}
+    UseWater: 0
+    ResizeToTerrain: 0
+    WaterObject: {fileID: 0}
+    WaterHeight: 0
+    RiverbedHeight: 0
+  MountainLayer:
+    Texture: {fileID: 0}
+    Normal: {fileID: 0}
+    Mask: {fileID: 0}
+    TileSize: {x: 1, y: 1}
   SnowLayer:
     Texture: {fileID: 2800000, guid: 0cc0777f7d4a3444380eb084d74396b5, type: 3}
     Normal: {fileID: 2800000, guid: 1ff4687a05ada474ca7eaf3010a871f6, type: 3}
     Mask: {fileID: 2800000, guid: 3c6d7b80bcc59ae448166eacd4ad79b0, type: 3}
     TileSize: {x: 5, y: 5}
-    MinHeight: 125
+    UseSnow: 0
+    Altitude: 0
     MaxAngle: 30
 --- !u!1 &705507993
 GameObject:
@@ -486,6 +536,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1179898695}
+  - component: {fileID: 1179898696}
   m_Layer: 0
   m_Name: Desert
   m_TagString: Untagged
@@ -508,6 +559,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1179898696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179898694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc14b5e68a982f74cbdb7d6e339c1c33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AssetPath: Assets/Terrains/Layers/Desert
+  Terrain: {fileID: 1685093814}
+  BaseLayer:
+    Texture: {fileID: 2800000, guid: aad8ca4f67b548c4c968d86efaec686d, type: 3}
+    Normal: {fileID: 0}
+    Mask: {fileID: 0}
+    TileSize: {x: 1, y: 1}
+    Altitude: 12
+    MaxAngle: 12.4
+  WaterLayer:
+    Texture: {fileID: 0}
+    Normal: {fileID: 0}
+    Mask: {fileID: 0}
+    TileSize: {x: 1, y: 1}
+    UseWater: 0
+    ResizeToTerrain: 0
+    WaterObject: {fileID: 0}
+    WaterHeight: 0
+    RiverbedHeight: 0
+  MountainLayer:
+    Texture: {fileID: 2800000, guid: 05dcd851a89870941b4cc2712b372480, type: 3}
+    Normal: {fileID: 0}
+    Mask: {fileID: 0}
+    TileSize: {x: 1, y: 1}
+  SnowLayer:
+    Texture: {fileID: 0}
+    Normal: {fileID: 0}
+    Mask: {fileID: 0}
+    TileSize: {x: 1, y: 1}
+    UseSnow: 0
+    Altitude: 10
+    MaxAngle: 90
 --- !u!1 &1655392308
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,6 +612,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1655392309}
+  - component: {fileID: 1655392310}
   m_Layer: 0
   m_Name: GrassLand
   m_TagString: Untagged
@@ -536,9 +632,54 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 724750327}
+  - {fileID: 1996325665}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1655392310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655392308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc14b5e68a982f74cbdb7d6e339c1c33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AssetPath: Assets/Terrains/Layers/Grassland
+  Terrain: {fileID: 724750326}
+  BaseLayer:
+    Texture: {fileID: 2800000, guid: 3cf543484d2fb7347b203b934a632fa6, type: 3}
+    Normal: {fileID: 0}
+    Mask: {fileID: 0}
+    TileSize: {x: 1, y: 1}
+    Altitude: 75
+    MaxAngle: 32.5
+  WaterLayer:
+    Texture: {fileID: 2800000, guid: f6605a6d90c197c4d99424a12dffb35c, type: 3}
+    Normal: {fileID: 0}
+    Mask: {fileID: 0}
+    TileSize: {x: 1, y: 1}
+    UseWater: 1
+    ResizeToTerrain: 1
+    WaterObject: {fileID: 1996325661}
+    WaterHeight: 4.5
+    RiverbedHeight: 0.5
+  MountainLayer:
+    Texture: {fileID: 2800000, guid: 66bfffbfc1446e24dbf6081d20fc9daa, type: 3}
+    Normal: {fileID: 0}
+    Mask: {fileID: 0}
+    TileSize: {x: 1, y: 1}
+  SnowLayer:
+    Texture: {fileID: 2800000, guid: badc4e58ab4c4de4fbc591540c5ccbe1, type: 3}
+    Normal: {fileID: 0}
+    Mask: {fileID: 0}
+    TileSize: {x: 1, y: 1}
+    UseSnow: 1
+    Altitude: 84.6
+    MaxAngle: 44.87
 --- !u!1 &1685093812
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,6 +756,103 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1179898695}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1996325661
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1996325665}
+  - component: {fileID: 1996325664}
+  - component: {fileID: 1996325663}
+  - component: {fileID: 1996325662}
+  m_Layer: 0
+  m_Name: Water
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!64 &1996325662
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996325661}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &1996325663
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996325661}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 642e87102b78f0049b344442da016a45, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1996325664
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996325661}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1996325665
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996325661}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 500, y: 4.5, z: 500}
+  m_LocalScale: {x: 100, y: 600, z: 100}
+  m_Children: []
+  m_Father: {fileID: 1655392309}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2053159414
 GameObject:
