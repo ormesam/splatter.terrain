@@ -9,6 +9,8 @@ using UnityEditor;
 
 namespace Splatter {
     public class Splatter : MonoBehaviour {
+        [HideInInspector] public UI UI;
+
         public string AssetPath = "Assets/Terrains/Layers";
         public Terrain Terrain;
         public BaseLayer BaseLayer;

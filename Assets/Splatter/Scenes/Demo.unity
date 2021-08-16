@@ -167,6 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc14b5e68a982f74cbdb7d6e339c1c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UI:
+    TabIdx: 2
   AssetPath: Assets/Terrains/Layers/Snow
   Terrain: {fileID: 2053159416}
   BaseLayer:
@@ -185,7 +187,7 @@ MonoBehaviour:
     ResizeToTerrain: 0
     WaterObject: {fileID: 0}
     WaterHeight: 0
-    RiverbedHeight: 0.1
+    RiverbedHeight: 0
   MountainLayer:
     Texture: {fileID: 2800000, guid: 66bfffbfc1446e24dbf6081d20fc9daa, type: 3}
     Normal: {fileID: 0}
@@ -198,7 +200,7 @@ MonoBehaviour:
     TileSize: {x: 1, y: 1}
     UseSnow: 0
     Altitude: 0
-    MaxAngle: 90
+    MaxAngle: 0
 --- !u!1 &234182513
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,6 +244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc14b5e68a982f74cbdb7d6e339c1c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UI:
+    TabIdx: 0
   AssetPath: Assets/Terrains/Layers
   Terrain: {fileID: 0}
   BaseLayer:
@@ -571,6 +575,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc14b5e68a982f74cbdb7d6e339c1c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UI:
+    TabIdx: 0
   AssetPath: Assets/Terrains/Layers/Desert
   Terrain: {fileID: 1685093814}
   BaseLayer:
@@ -648,6 +654,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc14b5e68a982f74cbdb7d6e339c1c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UI:
+    TabIdx: 1
   AssetPath: Assets/Terrains/Layers/Grassland
   Terrain: {fileID: 724750326}
   BaseLayer:
@@ -678,8 +686,8 @@ MonoBehaviour:
     Mask: {fileID: 0}
     TileSize: {x: 1, y: 1}
     UseSnow: 1
-    Altitude: 84.6
-    MaxAngle: 44.87
+    Altitude: 80
+    MaxAngle: 45
 --- !u!1 &1685093812
 GameObject:
   m_ObjectHideFlags: 0
