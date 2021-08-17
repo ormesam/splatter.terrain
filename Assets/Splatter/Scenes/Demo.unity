@@ -168,8 +168,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UI:
-    TabIdx: 3
-  AssetPath: Assets/Terrains/Layers/Snow
+    TabIdx: 0
+  AssetPath: Assets/Splatter/Terrains/Layers/Snow
   Terrain: {fileID: 2053159416}
   BaseLayer:
     Texture: {fileID: 2800000, guid: badc4e58ab4c4de4fbc591540c5ccbe1, type: 3}
@@ -500,7 +500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UI:
     TabIdx: 0
-  AssetPath: Assets/Terrains/Layers/Desert
+  AssetPath: Assets/Splatter/Terrains/Layers/Desert
   Terrain: {fileID: 1685093814}
   BaseLayer:
     Texture: {fileID: 2800000, guid: aad8ca4f67b548c4c968d86efaec686d, type: 3}
@@ -579,7 +579,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UI:
     TabIdx: 0
-  AssetPath: Assets/Terrains/Layers/Grassland
+  AssetPath: Assets/Splatter/Terrains/Layers/Grassland
   Terrain: {fileID: 724750326}
   BaseLayer:
     Texture: {fileID: 2800000, guid: 3cf543484d2fb7347b203b934a632fa6, type: 3}
