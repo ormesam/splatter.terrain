@@ -31,13 +31,11 @@ namespace Splatter {
         }
 
         private void CreateHeader() {
-            GUILayout.BeginHorizontal();
+            GUILayout.BeginVertical();
+            CreateSplatterHeader();
             string assetPath = EditorGUILayout.TextField("Asset Save Path", splatter.AssetPath);
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
             Terrain terrain = (Terrain)EditorGUILayout.ObjectField("Terrain", splatter.Terrain, typeof(Terrain), true);
-            GUILayout.EndHorizontal();
+            GUILayout.EndVertical();
 
             EditorGUILayout.Space();
 
@@ -45,6 +43,15 @@ namespace Splatter {
                 splatter.AssetPath = assetPath;
                 splatter.Terrain = terrain;
             }
+        }
+
+        private void CreateSplatterHeader() {
+            GUIStyle textStyle = new GUIStyle(GUI.skin.label);
+            textStyle.richText = true;
+            textStyle.alignment = TextAnchor.MiddleCenter;
+
+            GUILayout.Label("<b><size=30>Splatter</size></b>", textStyle, GUILayout.ExpandHeight(true));
+            GUILayout.Label("<size=10>© Sam Orme</size>", textStyle);
         }
 
         private void CreateTabs() {
@@ -93,17 +100,9 @@ namespace Splatter {
         private void CreateBaseTab() {
             GUILayout.BeginVertical();
 
-            GUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Base Layer", EditorStyles.boldLabel);
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
             float altitude = Mathf.Max(EditorGUILayout.FloatField("Max Altitude", splatter.BaseLayer.Altitude), 0);
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
             float maxAngle = Mathf.Max(EditorGUILayout.FloatField("Max Angle", splatter.BaseLayer.MaxAngle), 0);
-            GUILayout.EndHorizontal();
 
             DrawTextureFields(splatter.BaseLayer);
 
@@ -118,9 +117,7 @@ namespace Splatter {
         private void CreateMountainTab() {
             GUILayout.BeginVertical();
 
-            GUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Mountain Layer", EditorStyles.boldLabel);
-            GUILayout.EndHorizontal();
 
             DrawTextureFields(splatter.MountainLayer);
 
@@ -130,13 +127,8 @@ namespace Splatter {
         private void CreateWaterTab() {
             GUILayout.BeginVertical();
 
-            GUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Water Layer", EditorStyles.boldLabel);
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
             bool useWater = EditorGUILayout.ToggleLeft("Use Water", splatter.WaterLayer.UseWater);
-            GUILayout.EndHorizontal();
 
             GameObject waterObject = null;
             float waterHeight = 0;
@@ -144,21 +136,10 @@ namespace Splatter {
             float riverBedHeight = 0;
 
             if (useWater) {
-                GUILayout.BeginHorizontal();
                 waterObject = (GameObject)EditorGUILayout.ObjectField("Water Object", splatter.WaterLayer.WaterObject, typeof(GameObject), true);
-                GUILayout.EndHorizontal();
-
-                GUILayout.BeginHorizontal();
                 resizeToTerrain = EditorGUILayout.ToggleLeft("Resize Water Object to Terrain", splatter.WaterLayer.ResizeToTerrain);
-                GUILayout.EndHorizontal();
-
-                GUILayout.BeginHorizontal();
                 waterHeight = Mathf.Max(EditorGUILayout.FloatField("Water Height", splatter.WaterLayer.WaterHeight), 0);
-                GUILayout.EndHorizontal();
-
-                GUILayout.BeginHorizontal();
                 riverBedHeight = Mathf.Max(EditorGUILayout.FloatField("Riverbed Height", splatter.WaterLayer.RiverbedHeight), 0);
-                GUILayout.EndHorizontal();
 
                 DrawTextureFields(splatter.WaterLayer, "Riverbed");
             }
@@ -167,35 +148,28 @@ namespace Splatter {
 
             if (EditorGUI.EndChangeCheck()) {
                 splatter.WaterLayer.UseWater = useWater;
-                splatter.WaterLayer.WaterObject = waterObject;
-                splatter.WaterLayer.ResizeToTerrain = resizeToTerrain;
-                splatter.WaterLayer.RiverbedHeight = riverBedHeight;
-                splatter.WaterLayer.WaterHeight = waterHeight;
+
+                if (useWater) {
+                    splatter.WaterLayer.WaterObject = waterObject;
+                    splatter.WaterLayer.ResizeToTerrain = resizeToTerrain;
+                    splatter.WaterLayer.RiverbedHeight = riverBedHeight;
+                    splatter.WaterLayer.WaterHeight = waterHeight;
+                }
             }
         }
 
         private void CreateSnowTab() {
             GUILayout.BeginVertical();
 
-            GUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Snow Layer", EditorStyles.boldLabel);
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
             bool useSnow = EditorGUILayout.ToggleLeft("Use Snow", splatter.SnowLayer.UseSnow);
-            GUILayout.EndHorizontal();
 
             float altitude = 0;
             float maxAngle = 0;
 
             if (useSnow) {
-                GUILayout.BeginHorizontal();
                 altitude = Mathf.Max(EditorGUILayout.FloatField("Min Altitude", splatter.SnowLayer.Altitude), 0);
-                GUILayout.EndHorizontal();
-
-                GUILayout.BeginHorizontal();
                 maxAngle = Mathf.Max(EditorGUILayout.FloatField("Max Angle", splatter.SnowLayer.MaxAngle), 0);
-                GUILayout.EndHorizontal();
 
                 DrawTextureFields(splatter.SnowLayer);
             }
@@ -204,8 +178,11 @@ namespace Splatter {
 
             if (EditorGUI.EndChangeCheck()) {
                 splatter.SnowLayer.UseSnow = useSnow;
-                splatter.SnowLayer.Altitude = altitude;
-                splatter.SnowLayer.MaxAngle = maxAngle;
+
+                if (useSnow) {
+                    splatter.SnowLayer.Altitude = altitude;
+                    splatter.SnowLayer.MaxAngle = maxAngle;
+                }
             }
         }
 
@@ -214,21 +191,10 @@ namespace Splatter {
                 fieldPrefix += " ";
             }
 
-            GUILayout.BeginHorizontal();
             var texture = (Texture2D)EditorGUILayout.ObjectField(fieldPrefix + "Texture", layer.Texture, typeof(Texture2D), false);
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
             var normal = (Texture2D)EditorGUILayout.ObjectField(fieldPrefix + "Normal", layer.Normal, typeof(Texture2D), false);
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
             var mask = (Texture2D)EditorGUILayout.ObjectField(fieldPrefix + "Mask", layer.Mask, typeof(Texture2D), false);
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
             var tileSize = EditorGUILayout.Vector2Field(fieldPrefix + "Tile Size", layer.TileSize);
-            GUILayout.EndHorizontal();
 
             if (EditorGUI.EndChangeCheck()) {
                 layer.Texture = texture;

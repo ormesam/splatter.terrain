@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UI:
-    TabIdx: 2
+    TabIdx: 0
   AssetPath: Assets/Terrains/Layers/Snow
   Terrain: {fileID: 2053159416}
   BaseLayer:
@@ -187,7 +187,7 @@ MonoBehaviour:
     ResizeToTerrain: 0
     WaterObject: {fileID: 0}
     WaterHeight: 0
-    RiverbedHeight: 0
+    RiverbedHeight: 0.01
   MountainLayer:
     Texture: {fileID: 2800000, guid: 66bfffbfc1446e24dbf6081d20fc9daa, type: 3}
     Normal: {fileID: 0}
@@ -556,7 +556,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1179898694}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1174}
+  m_LocalPosition: {x: 0, y: 0, z: -1323}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1685093815}
@@ -607,8 +607,8 @@ MonoBehaviour:
     Mask: {fileID: 0}
     TileSize: {x: 1, y: 1}
     UseSnow: 0
-    Altitude: 10
-    MaxAngle: 90
+    Altitude: 0
+    MaxAngle: 0
 --- !u!1 &1655392308
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,7 +655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UI:
-    TabIdx: 1
+    TabIdx: 0
   AssetPath: Assets/Terrains/Layers/Grassland
   Terrain: {fileID: 724750326}
   BaseLayer:
