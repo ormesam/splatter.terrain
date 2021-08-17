@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44946158, g: 0.49953407, b: 0.5756886, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -148,12 +148,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102420613}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -434}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2053159417}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &102420615
 MonoBehaviour:
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UI:
-    TabIdx: 0
+    TabIdx: 3
   AssetPath: Assets/Terrains/Layers/Snow
   Terrain: {fileID: 2053159416}
   BaseLayer:
@@ -201,83 +201,6 @@ MonoBehaviour:
     UseSnow: 0
     Altitude: 0
     MaxAngle: 0
---- !u!1 &234182513
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 234182514}
-  - component: {fileID: 234182516}
-  m_Layer: 0
-  m_Name: Splatter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &234182514
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 234182513}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &234182516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 234182513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc14b5e68a982f74cbdb7d6e339c1c33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UI:
-    TabIdx: 0
-  AssetPath: Assets/Terrains/Layers
-  Terrain: {fileID: 0}
-  BaseLayer:
-    Texture: {fileID: 0}
-    Normal: {fileID: 0}
-    Mask: {fileID: 0}
-    TileSize: {x: 1, y: 1}
-    Altitude: 0
-    MaxAngle: 45
-  WaterLayer:
-    Texture: {fileID: 0}
-    Normal: {fileID: 0}
-    Mask: {fileID: 0}
-    TileSize: {x: 1, y: 1}
-    UseWater: 0
-    ResizeToTerrain: 0
-    WaterObject: {fileID: 0}
-    WaterHeight: 0
-    RiverbedHeight: 0
-  MountainLayer:
-    Texture: {fileID: 0}
-    Normal: {fileID: 0}
-    Mask: {fileID: 0}
-    TileSize: {x: 1, y: 1}
-  SnowLayer:
-    Texture: {fileID: 2800000, guid: 0cc0777f7d4a3444380eb084d74396b5, type: 3}
-    Normal: {fileID: 2800000, guid: 1ff4687a05ada474ca7eaf3010a871f6, type: 3}
-    Mask: {fileID: 2800000, guid: 3c6d7b80bcc59ae448166eacd4ad79b0, type: 3}
-    TileSize: {x: 5, y: 5}
-    UseSnow: 0
-    Altitude: 0
-    MaxAngle: 30
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,13 +287,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.3636659, y: 0.009909104, z: 0.21529809, w: 0.90625364}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 40.911, y: -706.646, z: 31.729}
 --- !u!1 &724750324
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,7 +421,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 10000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -524,8 +447,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: -0.21393836, y: 0.6669521, z: -0.209229, w: -0.68236977}
+  m_LocalPosition: {x: 2271.379, y: 1211.905, z: -25.571198}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -556,12 +479,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1179898694}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1323}
+  m_LocalPosition: {x: 0, y: 0, z: -2292.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1685093815}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1179898696
 MonoBehaviour:
@@ -634,13 +557,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1655392308}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1354}
+  m_LocalPosition: {x: 0, y: 0, z: 923}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 724750327}
   - {fileID: 1996325665}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1655392310
 MonoBehaviour:
@@ -759,7 +682,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1685093812}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 501}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1179898695}
