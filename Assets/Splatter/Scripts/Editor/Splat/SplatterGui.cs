@@ -50,6 +50,7 @@ namespace Splatter {
 
             GUILayout.Label("<b><size=30>Splatter</size></b>", textStyle, GUILayout.ExpandHeight(true));
             GUILayout.Label("<size=10>© Sam Orme</size>", textStyle);
+            GUILayout.Label("<color=green>Place script on parent object of terrain</color>", textStyle);
         }
 
         private void CreateTabs() {
