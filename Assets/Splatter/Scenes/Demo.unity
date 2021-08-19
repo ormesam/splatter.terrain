@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UI:
-    TabIdx: 3
+    TabIdx: 0
   AssetPath: Assets/Splatter/Terrains/Layers/Snow
   BaseLayer:
     Texture: {fileID: 2800000, guid: badc4e58ab4c4de4fbc591540c5ccbe1, type: 3}
