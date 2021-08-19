@@ -34,14 +34,12 @@ namespace Splatter {
             GUILayout.BeginVertical();
             CreateSplatterHeader();
             string assetPath = EditorGUILayout.TextField("Asset Save Path", splatter.AssetPath);
-            Terrain terrain = (Terrain)EditorGUILayout.ObjectField("Terrain", splatter.Terrain, typeof(Terrain), true);
             GUILayout.EndVertical();
 
             EditorGUILayout.Space();
 
             if (EditorGUI.EndChangeCheck()) {
                 splatter.AssetPath = assetPath;
-                splatter.Terrain = terrain;
             }
         }
 

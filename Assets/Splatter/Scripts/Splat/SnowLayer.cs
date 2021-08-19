@@ -12,13 +12,13 @@ namespace Splatter {
 
         public override string Name => "Snow";
 
-        public override bool MeetsCriteria(Splatter splatter, float x, float y) {
+        public override bool MeetsCriteria(Splatter splatter, Terrain terrain, float x, float y) {
             if (!UseSnow) {
                 return false;
             }
 
-            float steepness = GetSteepness(splatter, x, y);
-            float height = GetHeight(splatter, x, y);
+            float steepness = GetSteepness(terrain, x, y);
+            float height = GetHeight(terrain, x, y);
 
             return steepness <= MaxAngle && height >= Altitude;
         }

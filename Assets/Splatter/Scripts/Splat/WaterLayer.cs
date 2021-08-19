@@ -12,12 +12,12 @@ namespace Splatter {
 
         public override string Name => "Riverbed";
 
-        public override bool MeetsCriteria(Splatter splatter, float x, float y) {
+        public override bool MeetsCriteria(Splatter splatter, Terrain terrain, float x, float y) {
             if (!UseWater) {
                 return false;
             }
 
-            return GetHeight(splatter, x, y) <= WaterHeight + RiverbedHeight;
+            return GetHeight(terrain, x, y) <= WaterHeight + RiverbedHeight;
         }
 
         public void UpdateWaterObjectIfRequired(Terrain terrain) {

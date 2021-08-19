@@ -11,18 +11,18 @@ namespace Splatter {
 
         public abstract string Name { get; }
 
-        public virtual bool MeetsCriteria(Splatter terrain, float x, float y) {
+        public virtual bool MeetsCriteria(Splatter splatter, Terrain terrain, float x, float y) {
             return true;
         }
 
-        public float GetSteepness(Splatter splatter, float x, float y) {
-            return splatter.Terrain.terrainData.GetSteepness(x, y);
+        public float GetSteepness(Terrain terrain, float x, float y) {
+            return terrain.terrainData.GetSteepness(x, y);
         }
 
-        public float GetHeight(Splatter splatter, float x, float y) {
-            return splatter.Terrain.terrainData.GetHeight(
-                Mathf.RoundToInt(x * splatter.Terrain.terrainData.heightmapResolution),
-                Mathf.RoundToInt(y * splatter.Terrain.terrainData.heightmapResolution));
+        public float GetHeight(Terrain terrain, float x, float y) {
+            return terrain.terrainData.GetHeight(
+                Mathf.RoundToInt(x * terrain.terrainData.heightmapResolution),
+                Mathf.RoundToInt(y * terrain.terrainData.heightmapResolution));
         }
 
         public TerrainLayer CreateLayer() {
