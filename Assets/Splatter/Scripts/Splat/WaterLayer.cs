@@ -35,7 +35,7 @@ namespace Splatter {
                     terrain.transform.position.x + (terrain.terrainData.size.x * 0.5f),
                     terrain.transform.position.y + WaterHeight,
                     terrain.transform.position.z + (terrain.terrainData.size.z * 0.5f));
-            } else {
+            } else if (WaterObject) {
                 WaterObject.transform.position = new Vector3(
                     WaterObject.transform.position.x,
                     WaterHeight,
