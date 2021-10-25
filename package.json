@@ -1,0 +1,21 @@
+{
+    "name": "com.samorme.splatter",
+    "version": "1.0.0",
+    "displayName": "Splatter",
+    "description": "Collection of useful tools and extensions for Unity",
+    "unity": "2019.1",
+    "unityRelease": "0b5",
+    "licensesUrl": "https://github.com/ormesam/splatter/blob/main/LICENSE",
+    "dependencies": {
+   },
+   "keywords": [
+      "Terrain Tool",
+      "Terrain Generator",
+      "Texture Tool"
+    ],
+    "author": {
+      "name": "Sam Orme",
+      "email": "sam@orme.me",
+      "url": "https://orme.me"
+    }
+  }
