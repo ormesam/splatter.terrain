@@ -7,7 +7,7 @@ using System.Linq;
 using UnityEditor;
 #endif
 
-namespace Splatter {
+namespace SplatterRuntime {
     public class Splatter : MonoBehaviour {
         [HideInInspector] public UI UI;
 

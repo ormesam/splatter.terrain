@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Splatter {
+namespace SplatterRuntime {
     public class HeightMapper : MonoBehaviour {
         public static void ApplyHeightmap(Texture2D heightmap, TerrainData terrain) {
             if (heightmap == null) {

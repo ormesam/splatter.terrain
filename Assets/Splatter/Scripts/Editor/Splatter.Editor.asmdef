@@ -1,0 +1,16 @@
+{
+    "name": "Splatter.Editor",
+    "rootNamespace": "SplatterEditor",
+    "references": [
+        "GUID:8327984497ac6764ab4eefdfc31dcfe7"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

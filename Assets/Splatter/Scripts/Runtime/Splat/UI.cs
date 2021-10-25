@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Splatter {
+namespace SplatterRuntime {
     [Serializable]
     public class UI {
         public int TabIdx;

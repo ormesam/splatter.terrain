@@ -1,7 +1,8 @@
-﻿using UnityEditor;
+﻿using SplatterRuntime;
+using UnityEditor;
 using UnityEngine;
 
-namespace Splatter {
+namespace SplatterEditor {
     [ExecuteInEditMode]
     public class HeightMapperGui : EditorWindow {
         private Terrain terrain;

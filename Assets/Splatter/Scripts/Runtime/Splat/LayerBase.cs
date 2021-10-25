@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Splatter {
+namespace SplatterRuntime {
     [Serializable]
     public abstract class LayerBase {
         public Texture2D Texture;

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Splatter {
+namespace SplatterRuntime {
     [Serializable]
     public class WaterLayer : LayerBase {
         public bool UseWater;

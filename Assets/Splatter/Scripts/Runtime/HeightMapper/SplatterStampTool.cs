@@ -5,7 +5,7 @@ using UnityEditor.Experimental.TerrainAPI;
 using UnityEngine;
 using UnityEngine.Experimental.TerrainAPI;
 
-namespace Splatter {
+namespace SplatterRuntime {
     // Oringinal from https://github.com/Roland09/StampToolExtended/blob/master/Assets/TerrainTools/StampToolExtended/StampToolExtended.cs
     public class SplatterStampTool : TerrainPaintTool<SplatterStampTool> {
         private PreviewRenderUtility previewUtility;

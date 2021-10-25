@@ -1,8 +1,9 @@
 ﻿using System.Linq;
+using SplatterRuntime;
 using UnityEditor;
 using UnityEngine;
 
-namespace Splatter {
+namespace SplatterEditor {
     [CustomEditor(typeof(Splatter), false)]
     public class SplatterGui : Editor {
         private Splatter splatter;

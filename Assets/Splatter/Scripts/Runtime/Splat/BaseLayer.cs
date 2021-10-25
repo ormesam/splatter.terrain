@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Splatter {
+namespace SplatterRuntime {
     [Serializable]
     public class BaseLayer : LayerBase {
         public float Altitude = 0;
