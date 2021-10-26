@@ -132,12 +132,10 @@ namespace SplatterEditor.Splat {
 
             GameObject waterObject = null;
             float waterHeight = 0;
-            bool resizeToTerrain = false;
             float riverBedHeight = 0;
 
             if (useWater) {
                 waterObject = (GameObject)EditorGUILayout.ObjectField("Water Object", splatter.WaterLayer.WaterObject, typeof(GameObject), true);
-                resizeToTerrain = EditorGUILayout.ToggleLeft("Resize Water Object to Terrain", splatter.WaterLayer.ResizeToTerrain);
                 waterHeight = Mathf.Max(EditorGUILayout.FloatField("Water Height", splatter.WaterLayer.WaterHeight), 0);
                 riverBedHeight = Mathf.Max(EditorGUILayout.FloatField("Riverbed Height", splatter.WaterLayer.RiverbedHeight), 0);
 
@@ -151,7 +149,6 @@ namespace SplatterEditor.Splat {
 
                 if (useWater) {
                     splatter.WaterLayer.WaterObject = waterObject;
-                    splatter.WaterLayer.ResizeToTerrain = resizeToTerrain;
                     splatter.WaterLayer.RiverbedHeight = riverBedHeight;
                     splatter.WaterLayer.WaterHeight = waterHeight;
                 }
