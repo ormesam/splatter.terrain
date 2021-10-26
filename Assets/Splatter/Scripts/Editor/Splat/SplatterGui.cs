@@ -1,17 +1,17 @@
 ﻿using System.Linq;
-using SplatterRuntime;
+using Splatter.TerrainTools.AutoPainter;
 using UnityEditor;
 using UnityEngine;
 
-namespace SplatterEditor {
-    [CustomEditor(typeof(Splatter), false)]
+namespace SplatterEditor.Splat {
+    [CustomEditor(typeof(Painter), false)]
     public class SplatterGui : Editor {
-        private Splatter splatter;
+        private Painter splatter;
         private Texture2D[] buttons = new Texture2D[4];
-        private UI UI;
+        private SplatUI UI;
 
         private void OnEnable() {
-            splatter = target as Splatter;
+            splatter = target as Painter;
             UI = splatter.UI;
 
             string path = AssetDatabase.GetAssetPath(MonoScript.FromScriptableObject(this));
@@ -216,7 +216,7 @@ namespace SplatterEditor {
             EditorGUILayout.Space();
 
             if (GUI.Button(CreateButtonControl(), "Splat!")) {
-                splatter.Splat();
+                splatter.SplatTerrain();
             }
         }
 

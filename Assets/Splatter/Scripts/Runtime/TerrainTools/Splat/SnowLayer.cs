@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace SplatterRuntime {
+namespace Splatter.TerrainTools.AutoPainter {
     [Serializable]
     public class SnowLayer : LayerBase {
         public bool UseSnow;
@@ -12,7 +12,7 @@ namespace SplatterRuntime {
 
         public override string Name => "Snow";
 
-        public override bool MeetsCriteria(Splatter splatter, Terrain terrain, float x, float y) {
+        public override bool MeetsCriteria(Painter splatter, Terrain terrain, float x, float y) {
             if (!UseSnow) {
                 return false;
             }

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace SplatterRuntime {
+namespace Splatter.TerrainTools.AutoPainter {
     [Serializable]
     public class BaseLayer : LayerBase {
         public float Altitude = 0;

@@ -7,9 +7,9 @@ using System.Linq;
 using UnityEditor;
 #endif
 
-namespace SplatterRuntime {
-    public class Splatter : MonoBehaviour {
-        [HideInInspector] public UI UI;
+namespace Splatter.TerrainTools.AutoPainter {
+    public class Painter : MonoBehaviour {
+        [HideInInspector] public SplatUI UI;
 
         public string AssetPath = "Assets/Terrains/Layers";
         public BaseLayer BaseLayer;
@@ -21,7 +21,7 @@ namespace SplatterRuntime {
 
 #if UNITY_EDITOR
 
-        public void Splat() {
+        public void SplatTerrain() {
             var terrains = GetComponentsInChildren<Terrain>();
             var terrainLayers = CreateAndSetLayers();
 

@@ -5,9 +5,9 @@ using UnityEditor.Experimental.TerrainAPI;
 using UnityEngine;
 using UnityEngine.Experimental.TerrainAPI;
 
-namespace SplatterRuntime {
+namespace Splatter.TerrainTools.Stamp {
     // Oringinal from https://github.com/Roland09/StampToolExtended/blob/master/Assets/TerrainTools/StampToolExtended/StampToolExtended.cs
-    public class SplatterStampTool : TerrainPaintTool<SplatterStampTool> {
+    public class SplatStampTool : TerrainPaintTool<SplatStampTool> {
         private PreviewRenderUtility previewUtility;
         private const float brushSizeSafetyFactorHack = 0.9375f;
         private const float mouseWheelToHeightRatio = -0.0004f;

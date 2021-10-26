@@ -1,8 +1,8 @@
-﻿using SplatterRuntime;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
+using HeightMapperUtil = Splatter.TerrainTools.HeightMapper.HeightMapper;
 
-namespace SplatterEditor {
+namespace SplatterEditor.HeightMapper {
     [ExecuteInEditMode]
     public class HeightMapperGui : EditorWindow {
         private Terrain terrain;
@@ -22,7 +22,7 @@ namespace SplatterEditor {
             if (terrain == null || heightMap == null) {
                 EditorGUILayout.HelpBox("You need both a terrain object and height map texutre set before you can map the two.", MessageType.Warning);
             } else if (GUILayout.Button("Map")) {
-                HeightMapper.ApplyHeightmap(heightMap, terrain.terrainData);
+                HeightMapperUtil.ApplyHeightmap(heightMap, terrain.terrainData);
             }
 
             EditorGUILayout.EndVertical();

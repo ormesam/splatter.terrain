@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace SplatterRuntime {
+namespace Splatter.TerrainTools.HeightMapper {
     public class HeightMapper : MonoBehaviour {
         public static void ApplyHeightmap(Texture2D heightmap, TerrainData terrain) {
             if (heightmap == null) {
@@ -57,6 +57,7 @@ namespace SplatterRuntime {
                             Color tl = mapColors[y2 + xx];
                             Color tr = mapColors[y2 + xx + 1];
                             float xLerp = x * ratioX - xx;
+
                             map[yw + x] = Color.Lerp(Color.Lerp(bl, br, xLerp), Color.Lerp(tl, tr, xLerp), y * ratioY - (float)yy);
                         }
                     }

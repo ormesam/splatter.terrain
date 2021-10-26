@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace SplatterRuntime {
+namespace Splatter.TerrainTools.AutoPainter {
     [Serializable]
     public abstract class LayerBase {
         public Texture2D Texture;
@@ -11,7 +11,7 @@ namespace SplatterRuntime {
 
         public abstract string Name { get; }
 
-        public virtual bool MeetsCriteria(Splatter splatter, Terrain terrain, float x, float y) {
+        public virtual bool MeetsCriteria(Painter splatter, Terrain terrain, float x, float y) {
             return true;
         }
 

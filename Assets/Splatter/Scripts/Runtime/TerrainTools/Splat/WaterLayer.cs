@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace SplatterRuntime {
+namespace Splatter.TerrainTools.AutoPainter {
     [Serializable]
     public class WaterLayer : LayerBase {
         public bool UseWater;
@@ -12,7 +12,7 @@ namespace SplatterRuntime {
 
         public override string Name => "Riverbed";
 
-        public override bool MeetsCriteria(Splatter splatter, Terrain terrain, float x, float y) {
+        public override bool MeetsCriteria(Painter splatter, Terrain terrain, float x, float y) {
             if (!UseWater) {
                 return false;
             }
