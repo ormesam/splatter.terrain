@@ -29,5 +29,11 @@ namespace Splatter.AI.BehaviourTree {
         public void ResetTree() {
             root = SetRoot();
         }
+
+#if UNITY_INCLUDE_TESTS
+        public void IncrementTick() {
+            Ticks++;
+        }
+#endif
     }
 }
