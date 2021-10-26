@@ -1,6 +1,8 @@
 # Splatter
 Simple height based texturing tool for terrain. Add your textures, set the height and angle limits, and SPLAT!
 
+To add to your Unity project go to the Package Manager, click the plus in the top left of the window. Select git URL and enter: `https://github.com/ormesam/splatter.git?path=/Assets/Splatter`
+
 ![Screenshot](https://user-images.githubusercontent.com/8319419/129715874-a294d809-321c-4063-9b01-f14adba01089.PNG)
 
 ## To Use
