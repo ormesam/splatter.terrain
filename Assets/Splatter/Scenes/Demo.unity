@@ -168,17 +168,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UI:
-    TabIdx: 0
+    TabIdx: 3
   AssetPath: Assets/Splatter/Terrains/Layers/Snow
   BaseLayer:
-    Texture: {fileID: 2800000, guid: badc4e58ab4c4de4fbc591540c5ccbe1, type: 3}
+    Texture: {fileID: 2800000, guid: e6648b45bd1676d48a680b41fe7241ca, type: 3}
     Normal: {fileID: 0}
     Mask: {fileID: 0}
     TileSize: {x: 1, y: 1}
     Altitude: 1000
     MaxAngle: 47.1
   WaterLayer:
-    Texture: {fileID: 2800000, guid: 347057341653b8c4f9098cfa56734efc, type: 3}
+    Texture: {fileID: 2800000, guid: e6648b45bd1676d48a680b41fe7241ca, type: 3}
     Normal: {fileID: 0}
     Mask: {fileID: 0}
     TileSize: {x: 1, y: 1}
@@ -188,7 +188,7 @@ MonoBehaviour:
     WaterHeight: 0
     RiverbedHeight: 0.01
   MountainLayer:
-    Texture: {fileID: 2800000, guid: 66bfffbfc1446e24dbf6081d20fc9daa, type: 3}
+    Texture: {fileID: 2800000, guid: bb3ceeeadd6c03c409e97254bb5891cb, type: 3}
     Normal: {fileID: 0}
     Mask: {fileID: 0}
     TileSize: {x: 1, y: 1}
@@ -498,10 +498,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UI:
-    TabIdx: 0
+    TabIdx: 3
   AssetPath: Assets/Splatter/Terrains/Layers/Desert
   BaseLayer:
-    Texture: {fileID: 2800000, guid: aad8ca4f67b548c4c968d86efaec686d, type: 3}
+    Texture: {fileID: 2800000, guid: 6df450733bddb0a4380d7a871b8480b2, type: 3}
     Normal: {fileID: 0}
     Mask: {fileID: 0}
     TileSize: {x: 1, y: 1}
@@ -518,7 +518,7 @@ MonoBehaviour:
     WaterHeight: 0
     RiverbedHeight: 0
   MountainLayer:
-    Texture: {fileID: 2800000, guid: 05dcd851a89870941b4cc2712b372480, type: 3}
+    Texture: {fileID: 2800000, guid: 77fdb844fc3c90545919f80a27f7a750, type: 3}
     Normal: {fileID: 0}
     Mask: {fileID: 0}
     TileSize: {x: 1, y: 1}
@@ -576,17 +576,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UI:
-    TabIdx: 0
+    TabIdx: 3
   AssetPath: Assets/Splatter/Terrains/Layers/Grassland
   BaseLayer:
-    Texture: {fileID: 2800000, guid: 3cf543484d2fb7347b203b934a632fa6, type: 3}
+    Texture: {fileID: 2800000, guid: fec220b983bc3f84480c36ca863986bf, type: 3}
     Normal: {fileID: 0}
     Mask: {fileID: 0}
     TileSize: {x: 1, y: 1}
     Altitude: 75
     MaxAngle: 32.5
   WaterLayer:
-    Texture: {fileID: 2800000, guid: f6605a6d90c197c4d99424a12dffb35c, type: 3}
+    Texture: {fileID: 2800000, guid: e3ad58b4f479a7744bfd38c9b8292e2b, type: 3}
     Normal: {fileID: 0}
     Mask: {fileID: 0}
     TileSize: {x: 1, y: 1}
@@ -596,12 +596,12 @@ MonoBehaviour:
     WaterHeight: 4.5
     RiverbedHeight: 0.5
   MountainLayer:
-    Texture: {fileID: 2800000, guid: 66bfffbfc1446e24dbf6081d20fc9daa, type: 3}
+    Texture: {fileID: 2800000, guid: bb3ceeeadd6c03c409e97254bb5891cb, type: 3}
     Normal: {fileID: 0}
     Mask: {fileID: 0}
     TileSize: {x: 1, y: 1}
   SnowLayer:
-    Texture: {fileID: 2800000, guid: badc4e58ab4c4de4fbc591540c5ccbe1, type: 3}
+    Texture: {fileID: 2800000, guid: e27394a9243d7bf4b8e6a34df226ecfc, type: 3}
     Normal: {fileID: 0}
     Mask: {fileID: 0}
     TileSize: {x: 1, y: 1}

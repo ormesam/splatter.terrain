@@ -7,7 +7,7 @@ TerrainLayer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Riverbed
-  m_DiffuseTexture: {fileID: 2800000, guid: f6605a6d90c197c4d99424a12dffb35c, type: 3}
+  m_DiffuseTexture: {fileID: 2800000, guid: e3ad58b4f479a7744bfd38c9b8292e2b, type: 3}
   m_NormalMapTexture: {fileID: 0}
   m_MaskMapTexture: {fileID: 0}
   m_TileSize: {x: 1, y: 1}
