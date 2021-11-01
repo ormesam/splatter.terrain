@@ -6,5 +6,5 @@ To add to your Unity project go to the Package Manager, click the plus in the to
 
 ## Features
 - [**Terrain Painter**](TerrainPainter.md) - A simple height based texturing tool for terrain. Add your textures, set the height and angle limits, and SPLAT!
-- **Behaviour Tree** - A behaviour tree and code builder to simplify writing AI
+- [**Behaviour Tree**](BehaviourTree.md) - A behaviour tree and code builder to simplify writing AI
 
