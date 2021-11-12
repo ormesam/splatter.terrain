@@ -44,8 +44,8 @@ namespace Splatter.AI.BehaviourTree {
             return this;
         }
 
-        public BehaviourTreeBuilder DoIf(Func<bool> condition) {
-            AddNode(new ConditionDecorator(tree, condition));
+        public BehaviourTreeBuilder Condition(Func<bool> condition) {
+            Do(() => condition() ? NodeResult.Success : NodeResult.Failure);
 
             return this;
         }
