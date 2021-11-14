@@ -4,14 +4,18 @@ namespace Splatter.AI.BehaviourTree {
     public class Selector : Composite {
         private int currentNode = 0;
 
-        public Selector(BehaviourTree tree) : base(tree) {
-        }
-
-        public Selector(BehaviourTree tree, CompositeCancelType cancelType, Func<bool> cancelCondition)
+        public Selector(BehaviourTree tree, CompositeCancelType cancelType = CompositeCancelType.None, Func<bool> cancelCondition = null)
             : base(tree, cancelType, cancelCondition) {
         }
 
         public override NodeResult Execute() {
+            if (CanCancelCurrentNode && IsCancelled()) {
+                return NodeResult.Failure;
+            }
+
+            // Check previous nodes conditions
+            currentNode = GetCurrentNode();
+
             if (currentNode < Children.Count) {
                 var result = Children[currentNode].Execute();
 
@@ -33,6 +37,16 @@ namespace Splatter.AI.BehaviourTree {
             }
 
             return NodeResult.Failure;
+        }
+
+        private int GetCurrentNode() {
+            for (int i = 0; i < currentNode; i++) {
+                if (CanHigherPriorityNodeInterrupt(Children[i] as Composite)) {
+                    return i;
+                }
+            }
+
+            return currentNode;
         }
     }
 }

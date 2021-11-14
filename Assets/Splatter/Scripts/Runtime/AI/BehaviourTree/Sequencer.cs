@@ -6,16 +6,20 @@ namespace Splatter.AI.BehaviourTree {
         private int currentNode = 0;
         private int lastRanOnTick = 0;
 
-        public Sequencer(BehaviourTree tree, bool resetIfInterrupted) : base(tree) {
-            this.resetIfInterrupted = resetIfInterrupted;
-        }
-
-        public Sequencer(BehaviourTree tree, bool resetIfInterrupted, CompositeCancelType cancelType, Func<bool> cancelCondition)
+        public Sequencer(BehaviourTree tree, bool resetIfInterrupted, CompositeCancelType cancelType = CompositeCancelType.None, Func<bool> cancelCondition = null)
             : base(tree, cancelType, cancelCondition) {
+
             this.resetIfInterrupted = resetIfInterrupted;
         }
 
         public override NodeResult Execute() {
+            if (CanCancelCurrentNode && IsCancelled()) {
+                return NodeResult.Failure;
+            }
+
+            // Check previous nodes conditions
+            currentNode = GetCurrentNode();
+
             if (resetIfInterrupted && lastRanOnTick != Tree.Ticks - 1) {
                 currentNode = 0;
             }
@@ -43,6 +47,20 @@ namespace Splatter.AI.BehaviourTree {
             }
 
             return NodeResult.Success;
+        }
+
+        private int GetCurrentNode() {
+            if (resetIfInterrupted && lastRanOnTick != Tree.Ticks - 1) {
+                return 0;
+            }
+
+            for (int i = 0; i < currentNode; i++) {
+                if (CanHigherPriorityNodeInterrupt(Children[i] as Composite)) {
+                    return i;
+                }
+            }
+
+            return currentNode;
         }
     }
 }

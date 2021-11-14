@@ -3,20 +3,41 @@ using System.Collections.Generic;
 
 namespace Splatter.AI.BehaviourTree {
     public abstract class Composite : Node {
-        private readonly CompositeCancelType cancelType;
-        private readonly Func<bool> cancelCondition;
+        protected Func<bool> CancelCondition { get; private set; }
 
         public IList<Node> Children { get; set; }
+        public CompositeCancelType CancelType { get; private set; }
+        public bool CanCancelCurrentNode => CancelType == CompositeCancelType.CurrentAndLowerNodes || CancelType == CompositeCancelType.CurrentNode;
+        public bool CanCancelLowerNodes => CancelType == CompositeCancelType.CurrentAndLowerNodes || CancelType == CompositeCancelType.LowerNodes;
 
-
-        public Composite(BehaviourTree tree) : base(tree) {
+        public Composite(BehaviourTree tree, CompositeCancelType cancelType = CompositeCancelType.None, Func<bool> cancelCondition = null) : base(tree) {
             Children = new List<Node>();
-            this.cancelType = CompositeCancelType.None;
+            CancelType = cancelType;
+            CancelCondition = cancelCondition;
+
+            if (CancelType != CompositeCancelType.None && cancelCondition == null) {
+                throw new InvalidOperationException($"{nameof(CancelCondition)} cannot be null if {nameof(CancelType)} is not set to none");
+            }
         }
 
-        public Composite(BehaviourTree tree, CompositeCancelType cancelType, Func<bool> cancelCondition) : this(tree) {
-            this.cancelType = cancelType;
-            this.cancelCondition = cancelCondition;
+        protected bool IsCancelled() {
+            if (CancelType == CompositeCancelType.None) {
+                return true;
+            }
+
+            return !CancelCondition();
+        }
+
+        protected bool CanHigherPriorityNodeInterrupt(Composite composite) {
+            if (composite == null) {
+                return false;
+            }
+
+            if (!composite.CanCancelLowerNodes) {
+                return false;
+            }
+
+            return !composite.IsCancelled();
         }
     }
 }
