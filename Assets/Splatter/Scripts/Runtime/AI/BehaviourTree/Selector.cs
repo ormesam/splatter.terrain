@@ -1,9 +1,14 @@
+using System;
+
 namespace Splatter.AI.BehaviourTree {
-    // Essentially an OR gate
     public class Selector : Composite {
         private int currentNode = 0;
 
         public Selector(BehaviourTree tree) : base(tree) {
+        }
+
+        public Selector(BehaviourTree tree, CompositeCancelType cancelType, Func<bool> cancelCondition)
+            : base(tree, cancelType, cancelCondition) {
         }
 
         public override NodeResult Execute() {

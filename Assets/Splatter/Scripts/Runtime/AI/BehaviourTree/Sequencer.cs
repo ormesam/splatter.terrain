@@ -1,11 +1,17 @@
+using System;
+
 namespace Splatter.AI.BehaviourTree {
-    // Essentially an AND gate
     public class Sequencer : Composite {
         private readonly bool resetIfInterrupted;
         private int currentNode = 0;
         private int lastRanOnTick = 0;
 
         public Sequencer(BehaviourTree tree, bool resetIfInterrupted) : base(tree) {
+            this.resetIfInterrupted = resetIfInterrupted;
+        }
+
+        public Sequencer(BehaviourTree tree, bool resetIfInterrupted, CompositeCancelType cancelType, Func<bool> cancelCondition)
+            : base(tree, cancelType, cancelCondition) {
             this.resetIfInterrupted = resetIfInterrupted;
         }
 

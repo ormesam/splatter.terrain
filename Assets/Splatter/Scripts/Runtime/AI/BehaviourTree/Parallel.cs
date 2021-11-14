@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,6 +7,11 @@ namespace Splatter.AI.BehaviourTree {
         private readonly ParallelMode mode;
 
         public Parallel(BehaviourTree tree, ParallelMode mode) : base(tree) {
+            this.mode = mode;
+        }
+
+        public Parallel(BehaviourTree tree, ParallelMode mode, CompositeCancelType cancelType, Func<bool> cancelCondition)
+            : base(tree, cancelType, cancelCondition) {
             this.mode = mode;
         }
 
