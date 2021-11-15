@@ -61,5 +61,54 @@ namespace Splatter.Tests {
             Assert.AreEqual(NodeResult.Running, selector.Execute());
             Assert.AreEqual(NodeResult.Running, selector.Execute());
         }
+
+        [Test]
+        public void Selector_Cancel_Self() {
+            bool shouldCancel = false;
+
+            Selector selector = new Selector(Tree, CompositeCancelType.Self, () => shouldCancel);
+            selector.Children = new[] {
+                CreateFailureNode(),
+                CreateFailureNode(),
+                CreateSuccessNode(),
+            };
+
+            selector.Execute();
+            selector.Execute();
+            shouldCancel = true;
+            selector.Execute();
+
+            Assert.AreEqual(1, selector.GetCurrentIndex());
+        }
+
+        [Test]
+        public void Selector_Cancel_Lower() {
+            bool shouldCancel = false;
+
+            Selector selector = new Selector(Tree);
+            Selector childSelector = new Selector(Tree, CompositeCancelType.Lower, () => shouldCancel);
+
+            childSelector.Children = new[] {
+                CreateFailureNode(),
+                CreateFailureNode(),
+                CreateFailureNode(),
+            };
+
+            selector.Children = new[] {
+                childSelector,
+                CreateFailureNode(),
+                CreateSuccessNode(),
+            };
+
+            selector.Execute();
+            selector.Execute();
+            selector.Execute();
+            selector.Execute();
+            selector.Execute();
+            shouldCancel = true;
+            selector.Execute();
+
+            Assert.AreEqual(0, selector.GetCurrentIndex());
+        }
     }
 }

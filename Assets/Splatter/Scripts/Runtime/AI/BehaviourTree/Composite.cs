@@ -7,8 +7,8 @@ namespace Splatter.AI.BehaviourTree {
 
         public IList<Node> Children { get; set; }
         public CompositeCancelType CancelType { get; private set; }
-        public bool CanCancelCurrentNode => CancelType == CompositeCancelType.CurrentAndLowerNodes || CancelType == CompositeCancelType.CurrentNode;
-        public bool CanCancelLowerNodes => CancelType == CompositeCancelType.CurrentAndLowerNodes || CancelType == CompositeCancelType.LowerNodes;
+        public bool CanCancelCurrentNode => CancelType == CompositeCancelType.SelfAndLower || CancelType == CompositeCancelType.Self;
+        public bool CanCancelLowerNodes => CancelType == CompositeCancelType.SelfAndLower || CancelType == CompositeCancelType.Lower;
 
         public Composite(BehaviourTree tree, CompositeCancelType cancelType = CompositeCancelType.None, Func<bool> cancelCondition = null) : base(tree) {
             Children = new List<Node>();
