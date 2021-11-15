@@ -7,15 +7,22 @@
     "unityRelease": "0b5",
     "licensesUrl": "https://github.com/ormesam/splatter/blob/main/LICENSE",
     "dependencies": {
-   },
-   "keywords": [
-      "Terrain Tool",
-      "Terrain Generator",
-      "Texture Tool"
+    },
+    "keywords": [
+        "Terrain Tool",
+        "Terrain Generator",
+        "Texture Tool"
     ],
     "author": {
-      "name": "Sam Orme",
-      "email": "sam@orme.me",
-      "url": "https://orme.me"
-    }
-  }
+        "name": "Sam Orme",
+        "email": "sam@orme.me",
+        "url": "https://orme.me"
+    },
+    "samples": [
+        {
+            "displayName": "Samples",
+            "description": "Samples of splatter features",
+            "path": "Samples"
+        }
+    ]
+}
