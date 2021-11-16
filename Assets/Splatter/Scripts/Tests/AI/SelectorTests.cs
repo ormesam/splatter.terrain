@@ -63,10 +63,10 @@ namespace Splatter.Tests {
         }
 
         [Test]
-        public void Selector_Cancel_Self() {
-            bool shouldCancel = false;
+        public void Selector_Abort_Self() {
+            bool shouldAbort = false;
 
-            Selector selector = new Selector(Tree, CompositeCancelType.Self, () => shouldCancel);
+            Selector selector = new Selector(Tree, AbortType.Self, () => shouldAbort);
             selector.Children = new[] {
                 CreateFailureNode(),
                 CreateFailureNode(),
@@ -74,7 +74,7 @@ namespace Splatter.Tests {
             };
 
             selector.Execute();
-            shouldCancel = true;
+            shouldAbort = true;
             selector.Execute();
             selector.Execute();
 
@@ -82,11 +82,11 @@ namespace Splatter.Tests {
         }
 
         [Test]
-        public void Selector_Cancel_Lower() {
-            bool shouldCancel = false;
+        public void Selector_Abort_Lower() {
+            bool shouldAbort = false;
 
             Selector selector = new Selector(Tree);
-            Selector childSelector = new Selector(Tree, CompositeCancelType.Lower, () => shouldCancel);
+            Selector childSelector = new Selector(Tree, AbortType.Lower, () => shouldAbort);
 
             childSelector.Children = new[] {
                 CreateFailureNode(),
@@ -110,7 +110,7 @@ namespace Splatter.Tests {
 
             Assert.AreEqual(3, selector.CurrentIndex);
 
-            shouldCancel = true;
+            shouldAbort = true;
             selector.Execute();
             selector.Execute();
             selector.Execute();
@@ -121,11 +121,11 @@ namespace Splatter.Tests {
         }
 
         [Test]
-        public void Selector_Cancel_SelfAndLower() {
-            bool shouldCancel = false;
+        public void Selector_Abort_SelfAndLower() {
+            bool shouldAbort = false;
 
             Selector selector = new Selector(Tree);
-            Selector childSelector = new Selector(Tree, CompositeCancelType.SelfAndLower, () => shouldCancel);
+            Selector childSelector = new Selector(Tree, AbortType.SelfAndLower, () => shouldAbort);
 
             childSelector.Children = new[] {
                 CreateFailureNode(),
@@ -153,7 +153,7 @@ namespace Splatter.Tests {
             Assert.AreEqual(4, selector.CurrentIndex);
             Assert.AreEqual(0, childSelector.CurrentIndex);
 
-            shouldCancel = true;
+            shouldAbort = true;
 
             selector.Execute();
             selector.Execute();

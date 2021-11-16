@@ -3,29 +3,29 @@ using System.Collections.Generic;
 
 namespace Splatter.AI.BehaviourTree {
     public abstract class Composite : Node {
-        protected Func<bool> CancelCondition { get; private set; }
+        protected Func<bool> AbortCondition { get; private set; }
 
         public IList<Node> Children { get; set; }
-        public CompositeCancelType CancelType { get; private set; }
-        public bool CanCancelSelf => CancelType == CompositeCancelType.SelfAndLower || CancelType == CompositeCancelType.Self;
-        public bool CanCancelLower => CancelType == CompositeCancelType.SelfAndLower || CancelType == CompositeCancelType.Lower;
+        public AbortType AbortType { get; private set; }
+        public bool CanAbortSelf => AbortType == AbortType.SelfAndLower || AbortType == AbortType.Self;
+        public bool CanAbortLower => AbortType == AbortType.SelfAndLower || AbortType == AbortType.Lower;
 
-        public Composite(BehaviourTree tree, CompositeCancelType cancelType = CompositeCancelType.None, Func<bool> cancelCondition = null) : base(tree) {
+        public Composite(BehaviourTree tree, AbortType abortType = AbortType.None, Func<bool> abortCondition = null) : base(tree) {
             Children = new List<Node>();
-            CancelType = cancelType;
-            CancelCondition = cancelCondition;
+            AbortType = abortType;
+            AbortCondition = abortCondition;
 
-            if (CancelType != CompositeCancelType.None && cancelCondition == null) {
-                throw new InvalidOperationException($"{nameof(CancelCondition)} cannot be null if {nameof(CancelType)} is not set to none");
+            if (AbortType != AbortType.None && abortCondition == null) {
+                throw new InvalidOperationException($"{nameof(AbortCondition)} cannot be null if {nameof(AbortType)} is not set to none");
             }
         }
 
-        protected bool IsCancelled() {
-            if (CancelType == CompositeCancelType.None) {
+        protected bool IsSelfAborted() {
+            if (AbortType == AbortType.None) {
                 return false;
             }
 
-            return CancelCondition();
+            return AbortCondition();
         }
 
         protected bool CanHigherPriorityNodeInterrupt(Composite composite) {
@@ -33,11 +33,11 @@ namespace Splatter.AI.BehaviourTree {
                 return false;
             }
 
-            if (!composite.CanCancelLower) {
+            if (!composite.CanAbortLower) {
                 return false;
             }
 
-            return composite.IsCancelled();
+            return composite.AbortCondition();
         }
     }
 }

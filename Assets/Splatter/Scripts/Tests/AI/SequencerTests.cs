@@ -103,10 +103,10 @@ namespace Splatter.Tests {
         }
 
         [Test]
-        public void Sequencer_Cancel_Self() {
-            bool shouldCancel = false;
+        public void Sequencer_Abort_Self() {
+            bool shouldAbort = false;
 
-            Sequencer sequencer = new Sequencer(Tree, false, CompositeCancelType.Self, () => shouldCancel);
+            Sequencer sequencer = new Sequencer(Tree, false, AbortType.Self, () => shouldAbort);
             sequencer.Children = new[] {
                 CreateSuccessNode(),
                 CreateSuccessNode(),
@@ -116,17 +116,17 @@ namespace Splatter.Tests {
 
             sequencer.Execute();
             sequencer.Execute();
-            shouldCancel = true;
+            shouldAbort = true;
             Assert.AreEqual(NodeResult.Failure, sequencer.Execute());
             Assert.AreEqual(2, sequencer.CurrentIndex);
         }
 
         [Test]
-        public void Sequencer_Cancel_Lower() {
-            bool shouldCancel = false;
+        public void Sequencer_Abort_Lower() {
+            bool shouldAbort = false;
 
             Sequencer sequencer = new Sequencer(Tree, false);
-            Sequencer childSequencer = new Sequencer(Tree, false, CompositeCancelType.Lower, () => shouldCancel);
+            Sequencer childSequencer = new Sequencer(Tree, false, AbortType.Lower, () => shouldAbort);
 
             childSequencer.Children = new[] {
                 CreateSuccessNode(),
@@ -150,7 +150,7 @@ namespace Splatter.Tests {
             Assert.AreEqual(NodeResult.Running, sequencer.Execute());
             Assert.AreEqual(NodeResult.Running, sequencer.Execute());
 
-            shouldCancel = true;
+            shouldAbort = true;
 
             Assert.AreEqual(NodeResult.Running, sequencer.Execute());
             Assert.AreEqual(1, sequencer.CurrentIndex);
@@ -163,11 +163,11 @@ namespace Splatter.Tests {
         }
 
         [Test]
-        public void Sequencer_Cancel_SelfAndLower() {
-            bool shouldCancel = false;
+        public void Sequencer_Abort_SelfAndLower() {
+            bool shouldAbort = false;
 
             Sequencer sequencer = new Sequencer(Tree, false);
-            Sequencer childSequencer = new Sequencer(Tree, false, CompositeCancelType.SelfAndLower, () => shouldCancel);
+            Sequencer childSequencer = new Sequencer(Tree, false, AbortType.SelfAndLower, () => shouldAbort);
 
             childSequencer.Children = new[] {
                 CreateSuccessNode(),
@@ -189,7 +189,7 @@ namespace Splatter.Tests {
             Assert.AreEqual(NodeResult.Running, sequencer.Execute());
             Assert.AreEqual(NodeResult.Running, sequencer.Execute());
             Assert.AreEqual(NodeResult.Running, sequencer.Execute());
-            shouldCancel = true;
+            shouldAbort = true;
             Assert.AreEqual(NodeResult.Failure, sequencer.Execute());
         }
     }

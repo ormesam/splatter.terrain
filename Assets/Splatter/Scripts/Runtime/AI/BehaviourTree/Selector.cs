@@ -4,12 +4,12 @@ namespace Splatter.AI.BehaviourTree {
     public class Selector : Composite {
         private int currentNode = 0;
 
-        public Selector(BehaviourTree tree, CompositeCancelType cancelType = CompositeCancelType.None, Func<bool> cancelCondition = null)
-            : base(tree, cancelType, cancelCondition) {
+        public Selector(BehaviourTree tree, AbortType abortType = AbortType.None, Func<bool> abortCondition = null)
+            : base(tree, abortType, abortCondition) {
         }
 
         public override NodeResult Execute() {
-            if (CanCancelSelf && IsCancelled()) {
+            if (CanAbortSelf && IsSelfAborted()) {
                 return NodeResult.Failure;
             }
 

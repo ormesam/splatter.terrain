@@ -1,5 +1,5 @@
 ﻿namespace Splatter.AI.BehaviourTree {
-    public enum CompositeCancelType {
+    public enum AbortType {
         None,
         Self,
         Lower,

@@ -10,8 +10,8 @@ namespace Splatter.AI.BehaviourTree {
             this.mode = mode;
         }
 
-        public Parallel(BehaviourTree tree, ParallelMode mode, CompositeCancelType cancelType, Func<bool> cancelCondition)
-            : base(tree, cancelType, cancelCondition) {
+        public Parallel(BehaviourTree tree, ParallelMode mode, AbortType abortType, Func<bool> abortCondition)
+            : base(tree, abortType, abortCondition) {
             this.mode = mode;
         }
 

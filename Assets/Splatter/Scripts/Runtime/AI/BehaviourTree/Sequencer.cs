@@ -6,14 +6,14 @@ namespace Splatter.AI.BehaviourTree {
         private int currentNode = 0;
         private int lastRanOnTick = 0;
 
-        public Sequencer(BehaviourTree tree, bool resetIfInterrupted, CompositeCancelType cancelType = CompositeCancelType.None, Func<bool> cancelCondition = null)
-            : base(tree, cancelType, cancelCondition) {
+        public Sequencer(BehaviourTree tree, bool resetIfInterrupted, AbortType abortType = AbortType.None, Func<bool> abortCondition = null)
+            : base(tree, abortType, abortCondition) {
 
             this.resetIfInterrupted = resetIfInterrupted;
         }
 
         public override NodeResult Execute() {
-            if (CanCancelSelf && IsCancelled()) {
+            if (CanAbortSelf && IsSelfAborted()) {
                 return NodeResult.Failure;
             }
 
