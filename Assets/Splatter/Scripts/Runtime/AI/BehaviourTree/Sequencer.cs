@@ -18,7 +18,11 @@ namespace Splatter.AI.BehaviourTree {
             }
 
             // Check previous nodes conditions
-            currentNode = GetCurrentNode();
+            for (int i = 0; i < currentNode; i++) {
+                if (CanHigherPriorityNodeInterrupt(Children[i] as Composite)) {
+                    currentNode = i;
+                }
+            }
 
             if (resetIfInterrupted && lastRanOnTick != Tree.Ticks - 1) {
                 currentNode = 0;
@@ -49,18 +53,8 @@ namespace Splatter.AI.BehaviourTree {
             return NodeResult.Success;
         }
 
-        private int GetCurrentNode() {
-            if (resetIfInterrupted && lastRanOnTick != Tree.Ticks - 1) {
-                return 0;
-            }
-
-            for (int i = 0; i < currentNode; i++) {
-                if (CanHigherPriorityNodeInterrupt(Children[i] as Composite)) {
-                    return i;
-                }
-            }
-
-            return currentNode;
-        }
+#if UNITY_INCLUDE_TESTS
+        public int CurrentIndex => currentNode;
+#endif
     }
 }

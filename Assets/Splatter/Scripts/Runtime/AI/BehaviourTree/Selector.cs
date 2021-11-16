@@ -46,9 +46,7 @@ namespace Splatter.AI.BehaviourTree {
         }
 
 #if UNITY_INCLUDE_TESTS
-        public int GetCurrentIndex() {
-            return currentNode;
-        }
+        public int CurrentIndex => currentNode;
 #endif
     }
 }

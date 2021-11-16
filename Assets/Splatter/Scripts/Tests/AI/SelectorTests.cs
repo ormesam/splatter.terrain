@@ -78,7 +78,7 @@ namespace Splatter.Tests {
             selector.Execute();
             selector.Execute();
 
-            Assert.AreEqual(1, selector.GetCurrentIndex());
+            Assert.AreEqual(1, selector.CurrentIndex);
         }
 
         [Test]
@@ -108,7 +108,7 @@ namespace Splatter.Tests {
             selector.Execute();
             selector.Execute();
 
-            Assert.AreEqual(3, selector.GetCurrentIndex());
+            Assert.AreEqual(3, selector.CurrentIndex);
 
             shouldCancel = true;
             selector.Execute();
@@ -117,7 +117,7 @@ namespace Splatter.Tests {
             selector.Execute();
             selector.Execute();
 
-            Assert.AreEqual(1, selector.GetCurrentIndex());
+            Assert.AreEqual(1, selector.CurrentIndex);
         }
 
         [Test]
@@ -150,8 +150,8 @@ namespace Splatter.Tests {
             selector.Execute();
             selector.Execute();
 
-            Assert.AreEqual(4, selector.GetCurrentIndex());
-            Assert.AreEqual(0, childSelector.GetCurrentIndex());
+            Assert.AreEqual(4, selector.CurrentIndex);
+            Assert.AreEqual(0, childSelector.CurrentIndex);
 
             shouldCancel = true;
 
@@ -161,8 +161,8 @@ namespace Splatter.Tests {
             selector.Execute();
             selector.Execute();
 
-            Assert.AreEqual(2, selector.GetCurrentIndex());
-            Assert.AreEqual(0, childSelector.GetCurrentIndex());
+            Assert.AreEqual(2, selector.CurrentIndex);
+            Assert.AreEqual(0, childSelector.CurrentIndex);
         }
     }
 }
