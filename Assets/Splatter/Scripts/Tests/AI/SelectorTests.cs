@@ -74,8 +74,8 @@ namespace Splatter.Tests {
             };
 
             selector.Execute();
-            selector.Execute();
             shouldCancel = true;
+            selector.Execute();
             selector.Execute();
 
             Assert.AreEqual(1, selector.GetCurrentIndex());
@@ -95,7 +95,50 @@ namespace Splatter.Tests {
             };
 
             selector.Children = new[] {
+                CreateFailureNode(),
                 childSelector,
+                CreateFailureNode(),
+                CreateFailureNode(),
+                CreateFailureNode(),
+            };
+
+            selector.Execute();
+            selector.Execute();
+            selector.Execute();
+            selector.Execute();
+            selector.Execute();
+
+            Assert.AreEqual(3, selector.GetCurrentIndex());
+
+            shouldCancel = true;
+            selector.Execute();
+            selector.Execute();
+            selector.Execute();
+            selector.Execute();
+            selector.Execute();
+
+            Assert.AreEqual(1, selector.GetCurrentIndex());
+        }
+
+        [Test]
+        public void Selector_Cancel_SelfAndLower() {
+            bool shouldCancel = false;
+
+            Selector selector = new Selector(Tree);
+            Selector childSelector = new Selector(Tree, CompositeCancelType.SelfAndLower, () => shouldCancel);
+
+            childSelector.Children = new[] {
+                CreateFailureNode(),
+                CreateFailureNode(),
+                CreateFailureNode(),
+            };
+
+            selector.Children = new[] {
+                CreateFailureNode(),
+                CreateFailureNode(),
+                childSelector,
+                CreateFailureNode(),
+                CreateFailureNode(),
                 CreateFailureNode(),
                 CreateSuccessNode(),
             };
@@ -105,10 +148,21 @@ namespace Splatter.Tests {
             selector.Execute();
             selector.Execute();
             selector.Execute();
-            shouldCancel = true;
             selector.Execute();
 
-            Assert.AreEqual(0, selector.GetCurrentIndex());
+            Assert.AreEqual(4, selector.GetCurrentIndex());
+            Assert.AreEqual(0, childSelector.GetCurrentIndex());
+
+            shouldCancel = true;
+
+            selector.Execute();
+            selector.Execute();
+            selector.Execute();
+            selector.Execute();
+            selector.Execute();
+
+            Assert.AreEqual(2, selector.GetCurrentIndex());
+            Assert.AreEqual(0, childSelector.GetCurrentIndex());
         }
     }
 }

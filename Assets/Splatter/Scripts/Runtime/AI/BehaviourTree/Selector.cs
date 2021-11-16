@@ -9,12 +9,18 @@ namespace Splatter.AI.BehaviourTree {
         }
 
         public override NodeResult Execute() {
-            if (CanCancelCurrentNode && IsCancelled()) {
+            if (CanCancelSelf && IsCancelled()) {
                 return NodeResult.Failure;
             }
 
             // Check previous nodes conditions
-            currentNode = GetCurrentNode();
+            for (int i = 0; i < currentNode; i++) {
+                if (CanHigherPriorityNodeInterrupt(Children[i] as Composite)) {
+                    currentNode = i;
+
+                    return NodeResult.Failure;
+                }
+            }
 
             if (currentNode < Children.Count) {
                 var result = Children[currentNode].Execute();
@@ -37,16 +43,6 @@ namespace Splatter.AI.BehaviourTree {
             }
 
             return NodeResult.Failure;
-        }
-
-        private int GetCurrentNode() {
-            for (int i = 0; i < currentNode; i++) {
-                if (CanHigherPriorityNodeInterrupt(Children[i] as Composite)) {
-                    return i;
-                }
-            }
-
-            return currentNode;
         }
 
 #if UNITY_INCLUDE_TESTS

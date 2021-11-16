@@ -7,8 +7,8 @@ namespace Splatter.AI.BehaviourTree {
 
         public IList<Node> Children { get; set; }
         public CompositeCancelType CancelType { get; private set; }
-        public bool CanCancelCurrentNode => CancelType == CompositeCancelType.SelfAndLower || CancelType == CompositeCancelType.Self;
-        public bool CanCancelLowerNodes => CancelType == CompositeCancelType.SelfAndLower || CancelType == CompositeCancelType.Lower;
+        public bool CanCancelSelf => CancelType == CompositeCancelType.SelfAndLower || CancelType == CompositeCancelType.Self;
+        public bool CanCancelLower => CancelType == CompositeCancelType.SelfAndLower || CancelType == CompositeCancelType.Lower;
 
         public Composite(BehaviourTree tree, CompositeCancelType cancelType = CompositeCancelType.None, Func<bool> cancelCondition = null) : base(tree) {
             Children = new List<Node>();
@@ -22,10 +22,10 @@ namespace Splatter.AI.BehaviourTree {
 
         protected bool IsCancelled() {
             if (CancelType == CompositeCancelType.None) {
-                return true;
+                return false;
             }
 
-            return !CancelCondition();
+            return CancelCondition();
         }
 
         protected bool CanHigherPriorityNodeInterrupt(Composite composite) {
@@ -33,11 +33,11 @@ namespace Splatter.AI.BehaviourTree {
                 return false;
             }
 
-            if (!composite.CanCancelLowerNodes) {
+            if (!composite.CanCancelLower) {
                 return false;
             }
 
-            return !composite.IsCancelled();
+            return composite.IsCancelled();
         }
     }
 }

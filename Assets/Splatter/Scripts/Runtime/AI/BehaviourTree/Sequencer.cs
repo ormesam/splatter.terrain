@@ -13,7 +13,7 @@ namespace Splatter.AI.BehaviourTree {
         }
 
         public override NodeResult Execute() {
-            if (CanCancelCurrentNode && IsCancelled()) {
+            if (CanCancelSelf && IsCancelled()) {
                 return NodeResult.Failure;
             }
 
