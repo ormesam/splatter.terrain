@@ -1,11 +1,20 @@
 using System;
 
 namespace Splatter.AI.BehaviourTree {
+    /// <summary>
+    /// Always returns <see cref="NodeResult.Running"/> until all children succeed. 
+    /// If a child fails, <see cref="NodeResult.Failure"/> is returned.
+    /// </summary>
     public class Sequencer : Composite {
         private readonly bool resetIfInterrupted;
-        private int currentNode = 0;
         private int lastRanOnTick = 0;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Sequencer"/> class.
+        /// </summary>
+        /// <param name="tree">Behaviour tree</param>
+        /// <param name="abortType">Abort type</param>
+        /// <param name="condition">Condition to evaluate when aborting</param>
         public Sequencer(BehaviourTree tree, bool resetIfInterrupted, AbortType abortType = AbortType.None, Func<bool> condition = null)
             : base(tree, abortType, condition) {
 
@@ -17,36 +26,29 @@ namespace Splatter.AI.BehaviourTree {
                 return NodeResult.Failure;
             }
 
-            // Check previous nodes conditions
-            for (int i = 0; i < currentNode; i++) {
-                if (CanHigherPriorityNodeInterrupt(Children[i] as Composite)) {
-                    currentNode = i;
-
-                    break;
-                }
-            }
+            UpdateCurrentIdxIfInterrupted();
 
             if (resetIfInterrupted && lastRanOnTick != Tree.Ticks - 1) {
-                currentNode = 0;
+                CurrentNodeIdx = 0;
             }
 
             lastRanOnTick = Tree.Ticks;
 
-            if (currentNode < Children.Count) {
-                var result = Children[currentNode].Execute();
+            if (CurrentNodeIdx < Children.Count) {
+                var result = Children[CurrentNodeIdx].Execute();
 
                 if (result == NodeResult.Running) {
                     return NodeResult.Running;
                 } else if (result == NodeResult.Failure) {
-                    currentNode = 0;
+                    CurrentNodeIdx = 0;
                     return NodeResult.Failure;
                 } else {
-                    currentNode++;
+                    CurrentNodeIdx++;
 
-                    if (currentNode < Children.Count) {
+                    if (CurrentNodeIdx < Children.Count) {
                         return NodeResult.Running;
                     } else {
-                        currentNode = 0;
+                        CurrentNodeIdx = 0;
                         return NodeResult.Success;
                     }
                 }
@@ -57,7 +59,7 @@ namespace Splatter.AI.BehaviourTree {
 
 #if UNITY_INCLUDE_TESTS
         // Useful for debugging tests
-        public int CurrentIndex => currentNode;
+        public int CurrentIndex => CurrentNodeIdx;
 #endif
     }
 }

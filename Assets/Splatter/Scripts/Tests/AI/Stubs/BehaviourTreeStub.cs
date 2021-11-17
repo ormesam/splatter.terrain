@@ -2,7 +2,7 @@
 
 namespace Splatter.Tests.Stubs {
     public class BehaviourTreeStub : BehaviourTree {
-        public override Node SetRoot() {
+        protected override Node CreateRoot() {
             return new Leaf(this, () => NodeResult.Failure);
         }
     }

@@ -24,7 +24,7 @@ namespace Splatter.Tests {
                 CreateFailureNode(),
             };
 
-            Assert.AreEqual(NodeResult.Failure, parallel.Execute());
+            Assert.AreEqual(NodeResult.Running, parallel.Execute());
         }
 
         [Test]

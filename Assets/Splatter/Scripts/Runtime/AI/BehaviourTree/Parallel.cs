@@ -1,22 +1,28 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Splatter.AI.BehaviourTree {
+    /// <summary>
+    /// Executes all children in order each update, until the <see cref="ParallelMode"/> condition is met.
+    /// </summary>
     public class Parallel : Composite {
         private readonly ParallelMode mode;
 
-        public Parallel(BehaviourTree tree, ParallelMode mode) : base(tree) {
-            this.mode = mode;
-        }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Parallel"/> class.
+        /// </summary>
+        /// <param name="tree">Behaviour tree</param>
+        /// <param name="mode">Parallel mode</param>
+        public Parallel(BehaviourTree tree, ParallelMode mode)
+            : base(tree) {
 
-        public Parallel(BehaviourTree tree, ParallelMode mode, AbortType abortType, Func<bool> condition)
-            : base(tree, abortType, condition) {
             this.mode = mode;
         }
 
         public override NodeResult Execute() {
             IList<NodeResult> results = new List<NodeResult>();
+
+            CurrentNodeIdx = 0;
 
             foreach (var child in Children) {
                 var result = child.Execute();
@@ -37,6 +43,8 @@ namespace Splatter.AI.BehaviourTree {
                         return NodeResult.Failure;
                     }
                 }
+
+                CurrentNodeIdx++;
             }
 
             // Wait for all children to complete
@@ -45,10 +53,6 @@ namespace Splatter.AI.BehaviourTree {
             }
 
             if (mode == ParallelMode.WaitForAllSuccess) {
-                if (results.Any(i => i == NodeResult.Failure)) {
-                    return NodeResult.Failure;
-                }
-
                 return results.All(i => i == NodeResult.Success) ? NodeResult.Success : NodeResult.Running;
             }
 
