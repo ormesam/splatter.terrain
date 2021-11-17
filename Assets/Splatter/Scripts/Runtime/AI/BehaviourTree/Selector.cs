@@ -4,12 +4,12 @@ namespace Splatter.AI.BehaviourTree {
     public class Selector : Composite {
         private int currentNode = 0;
 
-        public Selector(BehaviourTree tree, AbortType abortType = AbortType.None, Func<bool> abortCondition = null)
-            : base(tree, abortType, abortCondition) {
+        public Selector(BehaviourTree tree, AbortType abortType = AbortType.None, Func<bool> condition = null)
+            : base(tree, abortType, condition) {
         }
 
         public override NodeResult Execute() {
-            if (CanAbortSelf && IsSelfAborted()) {
+            if (CanAbortSelf && !Condition()) {
                 return NodeResult.Failure;
             }
 
@@ -18,7 +18,7 @@ namespace Splatter.AI.BehaviourTree {
                 if (CanHigherPriorityNodeInterrupt(Children[i] as Composite)) {
                     currentNode = i;
 
-                    return NodeResult.Failure;
+                    break;
                 }
             }
 
@@ -46,6 +46,7 @@ namespace Splatter.AI.BehaviourTree {
         }
 
 #if UNITY_INCLUDE_TESTS
+        // Useful for debugging tests
         public int CurrentIndex => currentNode;
 #endif
     }

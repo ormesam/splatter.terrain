@@ -64,29 +64,26 @@ namespace Splatter.Tests {
 
         [Test]
         public void Selector_Abort_Self() {
-            bool shouldAbort = false;
+            bool condition = true;
 
-            Selector selector = new Selector(Tree, AbortType.Self, () => shouldAbort);
+            Selector selector = new Selector(Tree, AbortType.Self, () => condition);
             selector.Children = new[] {
                 CreateFailureNode(),
                 CreateFailureNode(),
                 CreateSuccessNode(),
             };
 
-            selector.Execute();
-            shouldAbort = true;
-            selector.Execute();
-            selector.Execute();
-
-            Assert.AreEqual(1, selector.CurrentIndex);
+            Assert.AreEqual(NodeResult.Running, selector.Execute());
+            condition = false;
+            Assert.AreEqual(NodeResult.Failure, selector.Execute());
         }
 
         [Test]
         public void Selector_Abort_Lower() {
-            bool shouldAbort = false;
+            bool condition = false;
 
             Selector selector = new Selector(Tree);
-            Selector childSelector = new Selector(Tree, AbortType.Lower, () => shouldAbort);
+            Selector childSelector = new Selector(Tree, AbortType.Lower, () => condition);
 
             childSelector.Children = new[] {
                 CreateFailureNode(),
@@ -97,72 +94,66 @@ namespace Splatter.Tests {
             selector.Children = new[] {
                 CreateFailureNode(),
                 childSelector,
-                CreateFailureNode(),
-                CreateFailureNode(),
-                CreateFailureNode(),
-            };
-
-            selector.Execute();
-            selector.Execute();
-            selector.Execute();
-            selector.Execute();
-            selector.Execute();
-
-            Assert.AreEqual(3, selector.CurrentIndex);
-
-            shouldAbort = true;
-            selector.Execute();
-            selector.Execute();
-            selector.Execute();
-            selector.Execute();
-            selector.Execute();
-
-            Assert.AreEqual(1, selector.CurrentIndex);
-        }
-
-        [Test]
-        public void Selector_Abort_SelfAndLower() {
-            bool shouldAbort = false;
-
-            Selector selector = new Selector(Tree);
-            Selector childSelector = new Selector(Tree, AbortType.SelfAndLower, () => shouldAbort);
-
-            childSelector.Children = new[] {
-                CreateFailureNode(),
-                CreateFailureNode(),
-                CreateFailureNode(),
-            };
-
-            selector.Children = new[] {
-                CreateFailureNode(),
-                CreateFailureNode(),
-                childSelector,
-                CreateFailureNode(),
                 CreateFailureNode(),
                 CreateFailureNode(),
                 CreateSuccessNode(),
             };
 
-            selector.Execute();
-            selector.Execute();
-            selector.Execute();
-            selector.Execute();
-            selector.Execute();
-            selector.Execute();
+            Assert.AreEqual(NodeResult.Running, selector.Execute());
+            Assert.AreEqual(NodeResult.Running, selector.Execute());
+            Assert.AreEqual(NodeResult.Running, selector.Execute());
+            Assert.AreEqual(NodeResult.Running, selector.Execute());
+            Assert.AreEqual(NodeResult.Running, selector.Execute());
+            Assert.AreEqual(NodeResult.Running, selector.Execute());
+            Assert.AreEqual(NodeResult.Success, selector.Execute());
 
-            Assert.AreEqual(4, selector.CurrentIndex);
-            Assert.AreEqual(0, childSelector.CurrentIndex);
+            Assert.AreEqual(NodeResult.Running, selector.Execute());
+            Assert.AreEqual(NodeResult.Running, selector.Execute());
+            Assert.AreEqual(NodeResult.Running, selector.Execute());
+            Assert.AreEqual(NodeResult.Running, selector.Execute());
 
-            shouldAbort = true;
+            condition = true;
 
-            selector.Execute();
-            selector.Execute();
-            selector.Execute();
-            selector.Execute();
-            selector.Execute();
+            Assert.AreEqual(NodeResult.Running, selector.Execute());
+            Assert.AreEqual(NodeResult.Running, selector.Execute());
+            Assert.AreEqual(NodeResult.Running, selector.Execute());
+            Assert.AreEqual(NodeResult.Running, selector.Execute());
+        }
 
-            Assert.AreEqual(2, selector.CurrentIndex);
-            Assert.AreEqual(0, childSelector.CurrentIndex);
+        [Test]
+        public void Selector_Abort_SelfAndLower() {
+            bool condition = false;
+
+            Selector selector = new Selector(Tree);
+            Selector childSelector = new Selector(Tree, AbortType.SelfAndLower, () => condition);
+
+            childSelector.Children = new[] {
+                CreateSuccessNode(),
+                CreateFailureNode(),
+                CreateFailureNode(),
+            };
+
+            selector.Children = new[] {
+                CreateFailureNode(),
+                CreateFailureNode(),
+                childSelector,
+                CreateFailureNode(),
+                CreateSuccessNode(),
+            };
+
+            Assert.AreEqual(NodeResult.Running, selector.Execute());
+            Assert.AreEqual(NodeResult.Running, selector.Execute());
+            Assert.AreEqual(NodeResult.Running, selector.Execute());
+            Assert.AreEqual(NodeResult.Running, selector.Execute());
+            Assert.AreEqual(NodeResult.Success, selector.Execute());
+
+            Assert.AreEqual(NodeResult.Running, selector.Execute());
+            Assert.AreEqual(NodeResult.Running, selector.Execute());
+            Assert.AreEqual(NodeResult.Running, selector.Execute());
+
+            condition = true;
+
+            Assert.AreEqual(NodeResult.Success, selector.Execute());
         }
     }
 }

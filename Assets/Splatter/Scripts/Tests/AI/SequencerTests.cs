@@ -104,9 +104,9 @@ namespace Splatter.Tests {
 
         [Test]
         public void Sequencer_Abort_Self() {
-            bool shouldAbort = false;
+            bool condition = true;
 
-            Sequencer sequencer = new Sequencer(Tree, false, AbortType.Self, () => shouldAbort);
+            Sequencer sequencer = new Sequencer(Tree, false, AbortType.Self, () => condition);
             sequencer.Children = new[] {
                 CreateSuccessNode(),
                 CreateSuccessNode(),
@@ -114,19 +114,18 @@ namespace Splatter.Tests {
                 CreateSuccessNode(),
             };
 
-            sequencer.Execute();
-            sequencer.Execute();
-            shouldAbort = true;
+            Assert.AreEqual(NodeResult.Running, sequencer.Execute());
+            Assert.AreEqual(NodeResult.Running, sequencer.Execute());
+            condition = false;
             Assert.AreEqual(NodeResult.Failure, sequencer.Execute());
-            Assert.AreEqual(2, sequencer.CurrentIndex);
         }
 
         [Test]
         public void Sequencer_Abort_Lower() {
-            bool shouldAbort = false;
+            bool condition = false;
 
             Sequencer sequencer = new Sequencer(Tree, false);
-            Sequencer childSequencer = new Sequencer(Tree, false, AbortType.Lower, () => shouldAbort);
+            Sequencer childSequencer = new Sequencer(Tree, false, AbortType.Lower, () => condition);
 
             childSequencer.Children = new[] {
                 CreateSuccessNode(),
@@ -150,10 +149,9 @@ namespace Splatter.Tests {
             Assert.AreEqual(NodeResult.Running, sequencer.Execute());
             Assert.AreEqual(NodeResult.Running, sequencer.Execute());
 
-            shouldAbort = true;
+            condition = true;
 
             Assert.AreEqual(NodeResult.Running, sequencer.Execute());
-            Assert.AreEqual(1, sequencer.CurrentIndex);
             Assert.AreEqual(NodeResult.Running, sequencer.Execute());
             Assert.AreEqual(NodeResult.Running, sequencer.Execute());
             Assert.AreEqual(NodeResult.Running, sequencer.Execute());
@@ -164,12 +162,13 @@ namespace Splatter.Tests {
 
         [Test]
         public void Sequencer_Abort_SelfAndLower() {
-            bool shouldAbort = false;
+            bool condition = false;
 
             Sequencer sequencer = new Sequencer(Tree, false);
-            Sequencer childSequencer = new Sequencer(Tree, false, AbortType.SelfAndLower, () => shouldAbort);
+            Sequencer childSequencer = new Sequencer(Tree, false, AbortType.SelfAndLower, () => condition);
 
             childSequencer.Children = new[] {
+                CreateSuccessNode(),
                 CreateSuccessNode(),
                 CreateSuccessNode(),
                 CreateSuccessNode(),
@@ -180,17 +179,25 @@ namespace Splatter.Tests {
                 childSequencer,
                 CreateSuccessNode(),
                 CreateSuccessNode(),
-                CreateSuccessNode(),
+                CreateFailureNode(),
             };
 
             Assert.AreEqual(NodeResult.Running, sequencer.Execute());
-            Assert.AreEqual(NodeResult.Running, sequencer.Execute());
-            Assert.AreEqual(NodeResult.Running, sequencer.Execute());
-            Assert.AreEqual(NodeResult.Running, sequencer.Execute());
-            Assert.AreEqual(NodeResult.Running, sequencer.Execute());
-            Assert.AreEqual(NodeResult.Running, sequencer.Execute());
-            shouldAbort = true;
             Assert.AreEqual(NodeResult.Failure, sequencer.Execute());
+
+            condition = true;
+
+            // Will always be running as nothing will get executed past the child sequencer
+            Assert.AreEqual(NodeResult.Running, sequencer.Execute());
+            Assert.AreEqual(NodeResult.Running, sequencer.Execute());
+            Assert.AreEqual(NodeResult.Running, sequencer.Execute());
+            Assert.AreEqual(NodeResult.Running, sequencer.Execute());
+            Assert.AreEqual(NodeResult.Running, sequencer.Execute());
+            Assert.AreEqual(NodeResult.Running, sequencer.Execute());
+            Assert.AreEqual(NodeResult.Running, sequencer.Execute());
+            Assert.AreEqual(NodeResult.Running, sequencer.Execute());
+            Assert.AreEqual(NodeResult.Running, sequencer.Execute());
+            Assert.AreEqual(NodeResult.Running, sequencer.Execute());
         }
     }
 }

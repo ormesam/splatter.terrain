@@ -6,14 +6,14 @@ namespace Splatter.AI.BehaviourTree {
         private int currentNode = 0;
         private int lastRanOnTick = 0;
 
-        public Sequencer(BehaviourTree tree, bool resetIfInterrupted, AbortType abortType = AbortType.None, Func<bool> abortCondition = null)
-            : base(tree, abortType, abortCondition) {
+        public Sequencer(BehaviourTree tree, bool resetIfInterrupted, AbortType abortType = AbortType.None, Func<bool> condition = null)
+            : base(tree, abortType, condition) {
 
             this.resetIfInterrupted = resetIfInterrupted;
         }
 
         public override NodeResult Execute() {
-            if (CanAbortSelf && IsSelfAborted()) {
+            if (CanAbortSelf && !Condition()) {
                 return NodeResult.Failure;
             }
 
@@ -21,6 +21,8 @@ namespace Splatter.AI.BehaviourTree {
             for (int i = 0; i < currentNode; i++) {
                 if (CanHigherPriorityNodeInterrupt(Children[i] as Composite)) {
                     currentNode = i;
+
+                    break;
                 }
             }
 
@@ -54,6 +56,7 @@ namespace Splatter.AI.BehaviourTree {
         }
 
 #if UNITY_INCLUDE_TESTS
+        // Useful for debugging tests
         public int CurrentIndex => currentNode;
 #endif
     }

@@ -14,14 +14,14 @@ namespace Splatter.AI.BehaviourTree {
             stack = new Stack<Node>();
         }
 
-        public BehaviourTreeBuilder Sequence(bool resetIfInterrupted = false, AbortType abortType = AbortType.None, Func<bool> abortCondition = null) {
-            AddNode(new Sequencer(tree, resetIfInterrupted, abortType, abortCondition));
+        public BehaviourTreeBuilder Sequence(bool resetIfInterrupted = false, AbortType abortType = AbortType.None, Func<bool> condition = null) {
+            AddNode(new Sequencer(tree, resetIfInterrupted, abortType, condition));
 
             return this;
         }
 
-        public BehaviourTreeBuilder Selector(AbortType abortType = AbortType.None, Func<bool> abortCondition = null) {
-            AddNode(new Selector(tree, abortType, abortCondition));
+        public BehaviourTreeBuilder Selector(AbortType abortType = AbortType.None, Func<bool> condition = null) {
+            AddNode(new Selector(tree, abortType, condition));
 
             return this;
         }
