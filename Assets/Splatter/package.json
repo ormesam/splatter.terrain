@@ -1,6 +1,6 @@
 {
     "name": "com.samorme.splatter",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "displayName": "Splatter",
     "description": "Collection of useful tools and extensions for Unity",
     "unity": "2019.1",
