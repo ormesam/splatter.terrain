@@ -114,6 +114,17 @@ namespace Splatter.AI.BehaviourTree {
         }
 
         /// <summary>
+        /// Wait for a random period of time before continuing.
+        /// </summary>
+        /// <param name="minSeconds">Minimum number of seconds to wait</param>
+        /// <param name="maxSeconds">Maximum number of seconds to wait</param>
+        public BehaviourTreeBuilder Wait(float minSeconds, float maxSeconds) {
+            AddNode(new WaitNode(tree, UnityEngine.Random.Range(minSeconds, maxSeconds)));
+
+            return this;
+        }
+
+        /// <summary>
         /// Wait forever.
         /// </summary>
         public BehaviourTreeBuilder WaitForever() {
