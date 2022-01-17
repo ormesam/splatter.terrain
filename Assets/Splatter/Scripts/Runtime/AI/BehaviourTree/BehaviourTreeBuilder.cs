@@ -125,6 +125,16 @@ namespace Splatter.AI.BehaviourTree {
         }
 
         /// <summary>
+        /// Wait until the condition is true to continue
+        /// </summary>
+        /// <param name="condition">Condition to be evaluated</param>
+        public BehaviourTreeBuilder WaitUntil(Func<bool> condition) {
+            AddNode(new WaitUntilNode(tree, condition));
+
+            return this;
+        }
+
+        /// <summary>
         /// Wait forever.
         /// </summary>
         public BehaviourTreeBuilder WaitForever() {

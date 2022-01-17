@@ -9,7 +9,7 @@ namespace Splatter.AI.BehaviourTree {
         private float? existTime;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SetBlackboardValueNode"/> class.
+        /// Initializes a new instance of the <see cref="WaitNode"/> class.
         /// </summary>
         /// <param name="tree">Behaviour tree</param>
         /// <param name="waitTime">Seconds to wait</param>
