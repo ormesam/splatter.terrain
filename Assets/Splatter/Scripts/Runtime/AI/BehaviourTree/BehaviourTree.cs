@@ -31,7 +31,7 @@ namespace Splatter.AI.BehaviourTree {
         /// <returns>Behaviour tree root</returns>
         protected abstract Node CreateRoot();
 
-        private void Update() {
+        protected virtual void Update() {
             root.Execute();
 
             Ticks++;
