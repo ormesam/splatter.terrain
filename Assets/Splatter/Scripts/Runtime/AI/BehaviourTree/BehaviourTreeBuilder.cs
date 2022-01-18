@@ -7,10 +7,10 @@ namespace Splatter.AI.BehaviourTree {
     /// Helper for creating behaviour tree
     /// </summary>
     public class BehaviourTreeBuilder {
-        public BehaviourTree Tree { get; private set; }
-
         private Node currentNode;
         private Stack<Node> stack;
+
+        public BehaviourTree Tree { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BehaviourTreeBuilder"/> class.

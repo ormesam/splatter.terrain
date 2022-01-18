@@ -19,9 +19,12 @@ namespace Splatter.AI.BehaviourTree {
         /// </summary>
         public int Ticks { get; private set; }
 
-        public virtual void Start() {
+        protected virtual void Awake() {
             Blackboard = new Dictionary<string, object>();
             Ticks = 0;
+        }
+
+        protected virtual void Start() {
             root = CreateRoot();
         }
 
