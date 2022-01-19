@@ -9,7 +9,7 @@ namespace Splatter.AI.BehaviourTree {
     public class BehaviourTreeBuilder {
         private Node currentNode;
         private Stack<Node> stack;
-        private bool isDebugging;
+        private bool isLogging;
 
         public BehaviourTree Tree { get; private set; }
 
@@ -219,14 +219,14 @@ namespace Splatter.AI.BehaviourTree {
             return currentNode;
         }
 
-        public BehaviourTreeBuilder StartDebugging() {
-            isDebugging = true;
+        public BehaviourTreeBuilder StartLogging() {
+            isLogging = true;
 
             return this;
         }
 
-        public BehaviourTreeBuilder StopDebugging() {
-            isDebugging = false;
+        public BehaviourTreeBuilder StopLogging() {
+            isLogging = false;
 
             return this;
         }

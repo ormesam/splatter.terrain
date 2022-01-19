@@ -50,13 +50,6 @@ namespace Splatter.AI.BehaviourTree {
             return (T)Blackboard[key];
         }
 
-        /// <summary>
-        /// Resets the tree and blacboard to the original state.
-        /// </summary>
-        public virtual void ResetTree() {
-            Start();
-        }
-
 #if UNITY_INCLUDE_TESTS
         public void IncrementTick() {
             Ticks++;
