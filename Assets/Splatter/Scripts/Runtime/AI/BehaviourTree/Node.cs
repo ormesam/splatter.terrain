@@ -5,7 +5,10 @@ namespace Splatter.AI.BehaviourTree {
     /// Base class for all nodes on a behaviour tree.
     /// </summary>
     public abstract class Node {
-        private readonly string name;
+        /// <summary>
+        /// Node name
+        /// </summary>
+        public string Name { get; private set; }
 
         /// <summary>
         /// Behaviour tree this node is on.
@@ -19,7 +22,7 @@ namespace Splatter.AI.BehaviourTree {
         /// </summary>
         /// <param name="tree">Behaviour tree this node is on.</param>
         public Node(string name, BehaviourTree tree) {
-            this.name = name;
+            this.Name = name;
 
             Tree = tree;
         }
