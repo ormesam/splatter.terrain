@@ -13,7 +13,7 @@ namespace Splatter.AI.BehaviourTree {
         /// </summary>
         /// <param name="tree">Behaviour tree</param>
         /// <param name="waitTime">Seconds to wait</param>
-        public WaitNode(BehaviourTree tree, float waitTime) : base(tree) {
+        public WaitNode(string name, BehaviourTree tree, float waitTime) : base(name, tree) {
             this.waitTime = waitTime;
         }
 

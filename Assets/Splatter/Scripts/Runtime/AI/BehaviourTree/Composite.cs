@@ -42,7 +42,7 @@ namespace Splatter.AI.BehaviourTree {
         /// <param name="tree">Behaviour tree</param>
         /// <param name="abortType">Abort type (optional)</param>
         /// <param name="condition">Condition evaluated for aborting (optional)</param>
-        public Composite(BehaviourTree tree, AbortType abortType = AbortType.None, Func<bool> condition = null) : base(tree) {
+        public Composite(string name, BehaviourTree tree, AbortType abortType = AbortType.None, Func<bool> condition = null) : base(name, tree) {
             Children = new List<Node>();
             AbortType = abortType;
             Condition = condition;

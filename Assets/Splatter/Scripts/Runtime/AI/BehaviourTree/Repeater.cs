@@ -7,7 +7,7 @@ namespace Splatter.AI.BehaviourTree {
         /// Initializes a new instance of the <see cref="Repeater"/> class.
         /// </summary>
         /// <param name="tree">Behaviour tree</param>
-        public Repeater(BehaviourTree tree) : base(tree) {
+        public Repeater(string name, BehaviourTree tree) : base(name, tree) {
         }
 
         public override NodeResult Execute() {

@@ -12,7 +12,7 @@ namespace Splatter.AI.BehaviourTree {
         /// </summary>
         /// <param name="tree">Behaviour tree</param>
         /// <param name="onExecute">Function to run on execution</param>
-        public Leaf(BehaviourTree tree, Func<NodeResult> onExecute) : base(tree) {
+        public Leaf(string name, BehaviourTree tree, Func<NodeResult> onExecute) : base(name, tree) {
             this.onExecute = onExecute;
         }
 

@@ -12,7 +12,7 @@ namespace Splatter.AI.BehaviourTree {
         /// </summary>
         /// <param name="tree">Behaviour tree</param>
         /// <param name="condition">Condition to evaluate</param>
-        public WaitUntilNode(BehaviourTree tree, Func<bool> condition) : base(tree) {
+        public WaitUntilNode(string name, BehaviourTree tree, Func<bool> condition) : base(name, tree) {
             this.condition = condition;
         }
 

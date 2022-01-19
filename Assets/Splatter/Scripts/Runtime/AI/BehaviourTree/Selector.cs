@@ -12,8 +12,8 @@ namespace Splatter.AI.BehaviourTree {
         /// <param name="tree">Behaviour tree</param>
         /// <param name="abortType">Abort type used for this compsite node</param>
         /// <param name="condition">Condition used to evaluate when aborting</param>
-        public Selector(BehaviourTree tree, AbortType abortType = AbortType.None, Func<bool> condition = null)
-            : base(tree, abortType, condition) {
+        public Selector(string name, BehaviourTree tree, AbortType abortType = AbortType.None, Func<bool> condition = null)
+            : base(name, tree, abortType, condition) {
         }
 
         public override NodeResult Execute() {

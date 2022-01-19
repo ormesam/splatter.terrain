@@ -9,6 +9,7 @@ namespace Splatter.AI.BehaviourTree {
     public class BehaviourTreeBuilder {
         private Node currentNode;
         private Stack<Node> stack;
+        private bool isDebugging;
 
         public BehaviourTree Tree { get; private set; }
 
@@ -23,11 +24,12 @@ namespace Splatter.AI.BehaviourTree {
         /// <summary>
         /// Adds sequence to the behaviour tree. Add <c>.End()</c> to the end of the sequence.
         /// </summary>
+        /// <param name="name">Node name</param>
         /// <param name="resetIfInterrupted">Reset behaviour tree if interrupted</param>
         /// <param name="abortType">Abort type</param>
         /// <param name="condition">Condition to evaluate</param>
-        public BehaviourTreeBuilder Sequence(bool resetIfInterrupted = false, AbortType abortType = AbortType.None, Func<bool> condition = null) {
-            AddNode(new Sequencer(Tree, resetIfInterrupted, abortType, condition));
+        public BehaviourTreeBuilder Sequence(string name, bool resetIfInterrupted = false, AbortType abortType = AbortType.None, Func<bool> condition = null) {
+            AddNode(new Sequencer(name, Tree, resetIfInterrupted, abortType, condition));
 
             return this;
         }
@@ -35,10 +37,11 @@ namespace Splatter.AI.BehaviourTree {
         /// <summary>
         /// Adds selector to the behaviour tree. Add <c>.End()</c> to the end of the selector.
         /// </summary>
+        /// <param name="name">Node name</param>
         /// <param name="abortType">Abort type</param>
         /// <param name="condition">Condition to evaluate</param>
-        public BehaviourTreeBuilder Selector(AbortType abortType = AbortType.None, Func<bool> condition = null) {
-            AddNode(new Selector(Tree, abortType, condition));
+        public BehaviourTreeBuilder Selector(string name, AbortType abortType = AbortType.None, Func<bool> condition = null) {
+            AddNode(new Selector(name, Tree, abortType, condition));
 
             return this;
         }
@@ -46,9 +49,10 @@ namespace Splatter.AI.BehaviourTree {
         /// <summary>
         /// Adds parallel composite to the behaviour tree. Add <c>.End()</c> to the end of the parallel.
         /// </summary>
+        /// <param name="name">Node name</param>
         /// <param name="mode">Parallel mode</param>
-        public BehaviourTreeBuilder Parallel(ParallelMode mode) {
-            AddNode(new Parallel(Tree, mode));
+        public BehaviourTreeBuilder Parallel(string name, ParallelMode mode) {
+            AddNode(new Parallel(name, Tree, mode));
 
             return this;
         }
@@ -56,8 +60,9 @@ namespace Splatter.AI.BehaviourTree {
         /// <summary>
         /// Repeat a single node forever. Only supprts one node. Add <c>.End()</c> to the end of the repeation.
         /// </summary>
-        public BehaviourTreeBuilder RepeatForever() {
-            AddNode(new Repeater(Tree));
+        /// <param name="name">Node name</param>
+        public BehaviourTreeBuilder RepeatForever(string name) {
+            AddNode(new Repeater(name, Tree));
 
             return this;
         }
@@ -75,9 +80,10 @@ namespace Splatter.AI.BehaviourTree {
         /// <summary>
         /// Add condition to the behaviour tree. Returns <see cref="NodeResult.Success"/> if true, otherwise <see cref="NodeResult.Failure"/>.
         /// </summary>
+        /// <param name="name">Node name</param>
         /// <param name="condition">Condition to evaluate</param>
-        public BehaviourTreeBuilder Condition(Func<bool> condition) {
-            Do(() => condition() ? NodeResult.Success : NodeResult.Failure);
+        public BehaviourTreeBuilder Condition(string name, Func<bool> condition) {
+            Do(name, () => condition() ? NodeResult.Success : NodeResult.Failure);
 
             return this;
         }
@@ -85,9 +91,10 @@ namespace Splatter.AI.BehaviourTree {
         /// <summary>
         /// Add node to the behaviour tree.
         /// </summary>
+        /// <param name="name">Node name</param>
         /// <param name="leaf">Function to evaluate</param>
-        public BehaviourTreeBuilder Do(Func<NodeResult> leaf) {
-            AddNode(new Leaf(Tree, leaf));
+        public BehaviourTreeBuilder Do(string name, Func<NodeResult> leaf) {
+            AddNode(new Leaf(name, Tree, leaf));
 
             return this;
         }
@@ -106,9 +113,10 @@ namespace Splatter.AI.BehaviourTree {
         /// <summary>
         /// Wait x seconds before continuing.
         /// </summary>
+        /// <param name="name">Node name</param>
         /// <param name="seconds">Seconds to wait</param>
-        public BehaviourTreeBuilder Wait(float seconds) {
-            AddNode(new WaitNode(Tree, seconds));
+        public BehaviourTreeBuilder Wait(string name, float seconds) {
+            AddNode(new WaitNode(name, Tree, seconds));
 
             return this;
         }
@@ -116,10 +124,11 @@ namespace Splatter.AI.BehaviourTree {
         /// <summary>
         /// Wait for a random period of time before continuing.
         /// </summary>
+        /// <param name="name">Node name</param>
         /// <param name="minSeconds">Minimum number of seconds to wait</param>
         /// <param name="maxSeconds">Maximum number of seconds to wait</param>
-        public BehaviourTreeBuilder Wait(float minSeconds, float maxSeconds) {
-            AddNode(new WaitNode(Tree, UnityEngine.Random.Range(minSeconds, maxSeconds)));
+        public BehaviourTreeBuilder Wait(string name, float minSeconds, float maxSeconds) {
+            AddNode(new WaitNode(name, Tree, UnityEngine.Random.Range(minSeconds, maxSeconds)));
 
             return this;
         }
@@ -127,9 +136,10 @@ namespace Splatter.AI.BehaviourTree {
         /// <summary>
         /// Wait until the condition is true to continue
         /// </summary>
+        /// <param name="name">Node name</param>
         /// <param name="condition">Condition to be evaluated</param>
-        public BehaviourTreeBuilder WaitUntil(Func<bool> condition) {
-            AddNode(new WaitUntilNode(Tree, condition));
+        public BehaviourTreeBuilder WaitUntil(string name, Func<bool> condition) {
+            AddNode(new WaitUntilNode(name, Tree, condition));
 
             return this;
         }
@@ -137,8 +147,9 @@ namespace Splatter.AI.BehaviourTree {
         /// <summary>
         /// Wait forever.
         /// </summary>
-        public BehaviourTreeBuilder WaitForever() {
-            AddNode(new EmptyRepeater(Tree));
+        /// <param name="name">Node name</param>
+        public BehaviourTreeBuilder WaitForever(string name) {
+            AddNode(new EmptyRepeater(name, Tree));
 
             return this;
         }
@@ -206,6 +217,14 @@ namespace Splatter.AI.BehaviourTree {
             }
 
             return currentNode;
+        }
+
+        public void StartDebugging() {
+            isDebugging = true;
+        }
+
+        public void StopDebugging() {
+            isDebugging = false;
         }
     }
 }

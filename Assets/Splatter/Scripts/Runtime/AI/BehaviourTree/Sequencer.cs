@@ -15,8 +15,8 @@ namespace Splatter.AI.BehaviourTree {
         /// <param name="tree">Behaviour tree</param>
         /// <param name="abortType">Abort type</param>
         /// <param name="condition">Condition to evaluate when aborting</param>
-        public Sequencer(BehaviourTree tree, bool resetIfInterrupted, AbortType abortType = AbortType.None, Func<bool> condition = null)
-            : base(tree, abortType, condition) {
+        public Sequencer(string name, BehaviourTree tree, bool resetIfInterrupted, AbortType abortType = AbortType.None, Func<bool> condition = null)
+            : base(name, tree, abortType, condition) {
 
             this.resetIfInterrupted = resetIfInterrupted;
         }

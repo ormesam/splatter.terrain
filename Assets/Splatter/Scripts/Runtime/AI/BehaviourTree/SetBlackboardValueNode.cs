@@ -12,7 +12,7 @@
         /// <param name="tree">Behaviour tree</param>
         /// <param name="key">Blackboard key</param>
         /// <param name="value">Value</param>
-        public SetBlackboardValueNode(BehaviourTree tree, string key, object value) : base(tree) {
+        public SetBlackboardValueNode(BehaviourTree tree, string key, object value) : base($"Setting blackboard {key} to {value}", tree) {
             this.key = key;
             this.value = value;
         }

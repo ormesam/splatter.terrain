@@ -5,7 +5,7 @@ namespace Splatter.Tests {
     public class ParallelAnyComplitionTests : TestBase {
         [Test]
         public void Parallel_Success() {
-            Parallel parallel = new Parallel(Tree, ParallelMode.ExitOnAnyCompletion);
+            Parallel parallel = new Parallel("Parallel", Tree, ParallelMode.ExitOnAnyCompletion);
             parallel.Children = new[]{
                 CreateRunningNode(),
                 CreateSuccessNode(),
@@ -17,7 +17,7 @@ namespace Splatter.Tests {
 
         [Test]
         public void Parallel_Failure() {
-            Parallel parallel = new Parallel(Tree, ParallelMode.ExitOnAnyCompletion);
+            Parallel parallel = new Parallel("Parallel", Tree, ParallelMode.ExitOnAnyCompletion);
             parallel.Children = new[]{
                 CreateRunningNode(),
                 CreateRunningNode(),
@@ -29,7 +29,7 @@ namespace Splatter.Tests {
 
         [Test]
         public void Parallel_Running() {
-            Parallel parallel = new Parallel(Tree, ParallelMode.ExitOnAnyCompletion);
+            Parallel parallel = new Parallel("Parallel", Tree, ParallelMode.ExitOnAnyCompletion);
             parallel.Children = new[]{
                 CreateRunningNode(),
                 CreateRunningNode(),
