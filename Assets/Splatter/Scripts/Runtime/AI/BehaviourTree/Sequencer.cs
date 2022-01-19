@@ -21,7 +21,7 @@ namespace Splatter.AI.BehaviourTree {
             this.resetIfInterrupted = resetIfInterrupted;
         }
 
-        public override NodeResult Execute() {
+        protected override NodeResult ExecuteNode() {
             if (CanAbortSelf && !Condition()) {
                 return NodeResult.Failure;
             }

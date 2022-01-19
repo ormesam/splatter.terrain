@@ -16,7 +16,7 @@ namespace Splatter.AI.BehaviourTree {
             : base(name, tree, abortType, condition) {
         }
 
-        public override NodeResult Execute() {
+        protected override NodeResult ExecuteNode() {
             if (CanAbortSelf && !Condition()) {
                 return NodeResult.Failure;
             }

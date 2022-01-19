@@ -219,12 +219,16 @@ namespace Splatter.AI.BehaviourTree {
             return currentNode;
         }
 
-        public void StartDebugging() {
+        public BehaviourTreeBuilder StartDebugging() {
             isDebugging = true;
+
+            return this;
         }
 
-        public void StopDebugging() {
+        public BehaviourTreeBuilder StopDebugging() {
             isDebugging = false;
+
+            return this;
         }
     }
 }

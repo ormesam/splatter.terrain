@@ -1,3 +1,5 @@
+using System;
+
 namespace Splatter.AI.BehaviourTree {
     /// <summary>
     /// Base class for all nodes on a behaviour tree.
@@ -9,6 +11,8 @@ namespace Splatter.AI.BehaviourTree {
         /// Behaviour tree this node is on.
         /// </summary>
         protected BehaviourTree Tree { get; private set; }
+
+        public event EventHandler<NodeResult> OnNodeExecuted;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Node"/> class.
@@ -24,6 +28,18 @@ namespace Splatter.AI.BehaviourTree {
         /// Behaviour of the node.
         /// </summary>
         /// <returns>The result of the execution.</returns>
-        public abstract NodeResult Execute();
+        public NodeResult Execute() {
+            var result = ExecuteNode();
+
+            OnNodeExecuted?.Invoke(this, result);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Behaviour of the node.
+        /// </summary>
+        /// <returns>The result of the execution.</returns>
+        protected abstract NodeResult ExecuteNode();
     }
 }

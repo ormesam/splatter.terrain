@@ -19,7 +19,7 @@ namespace Splatter.AI.BehaviourTree {
             this.mode = mode;
         }
 
-        public override NodeResult Execute() {
+        protected override NodeResult ExecuteNode() {
             IList<NodeResult> results = new List<NodeResult>();
 
             CurrentNodeIdx = 0;

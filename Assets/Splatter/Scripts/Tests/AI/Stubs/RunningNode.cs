@@ -5,7 +5,7 @@ namespace Splatter.Tests.Stubs {
         public RunningNode(BehaviourTree tree) : base("Running", tree) {
         }
 
-        public override NodeResult Execute() {
+        protected override NodeResult ExecuteNode() {
             return NodeResult.Running;
         }
     }

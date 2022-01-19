@@ -10,7 +10,7 @@ namespace Splatter.AI.BehaviourTree {
         public EmptyRepeater(string name, BehaviourTree tree) : base(name, tree) {
         }
 
-        public override NodeResult Execute() {
+        protected override NodeResult ExecuteNode() {
             return NodeResult.Running;
         }
     }

@@ -16,7 +16,7 @@ namespace Splatter.AI.BehaviourTree {
             this.onExecute = onExecute;
         }
 
-        public override NodeResult Execute() {
+        protected override NodeResult ExecuteNode() {
             return onExecute();
         }
     }

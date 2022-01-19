@@ -16,7 +16,7 @@ namespace Splatter.AI.BehaviourTree {
             this.condition = condition;
         }
 
-        public override NodeResult Execute() {
+        protected override NodeResult ExecuteNode() {
             return condition() ? NodeResult.Success : NodeResult.Running;
         }
     }

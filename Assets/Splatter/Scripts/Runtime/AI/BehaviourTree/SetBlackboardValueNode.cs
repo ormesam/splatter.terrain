@@ -17,7 +17,7 @@
             this.value = value;
         }
 
-        public override NodeResult Execute() {
+        protected override NodeResult ExecuteNode() {
             Tree.Blackboard[key] = value;
 
             return NodeResult.Success;

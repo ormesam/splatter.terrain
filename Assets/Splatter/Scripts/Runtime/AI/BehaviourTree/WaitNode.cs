@@ -17,7 +17,7 @@ namespace Splatter.AI.BehaviourTree {
             this.waitTime = waitTime;
         }
 
-        public override NodeResult Execute() {
+        protected override NodeResult ExecuteNode() {
             if (existTime == null) {
                 existTime = Time.time + waitTime;
             }
