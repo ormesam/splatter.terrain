@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Splatter.AI.BehaviourTree {
     /// <summary>
@@ -10,7 +9,6 @@ namespace Splatter.AI.BehaviourTree {
     public class BehaviourTreeBuilder {
         private Node currentNode;
         private Stack<Node> stack;
-        private bool isLogging;
 
         public BehaviourTree Tree { get; private set; }
 
@@ -182,12 +180,6 @@ namespace Splatter.AI.BehaviourTree {
 
                     decoratorNode.Child = node;
                 }
-
-                if (isLogging) {
-                    node.OnNodeExecuted += (s, e) => {
-                        Debug.Log($"Node executed: {node.Name} Result: {e}");
-                    };
-                }
             }
         }
 
@@ -224,18 +216,6 @@ namespace Splatter.AI.BehaviourTree {
             }
 
             return currentNode;
-        }
-
-        public BehaviourTreeBuilder StartLogging() {
-            isLogging = true;
-
-            return this;
-        }
-
-        public BehaviourTreeBuilder StopLogging() {
-            isLogging = false;
-
-            return this;
         }
     }
 }

@@ -55,5 +55,11 @@ namespace Splatter.AI.BehaviourTree {
             Ticks++;
         }
 #endif
+
+#if UNITY_EDITOR
+        public Node GetRoot() {
+            return root;
+        }
+#endif
     }
 }

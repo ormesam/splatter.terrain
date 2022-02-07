@@ -1,10 +1,10 @@
-using System;
-
 namespace Splatter.AI.BehaviourTree {
     /// <summary>
     /// Base class for all nodes on a behaviour tree.
     /// </summary>
     public abstract class Node {
+        private int lastExecutedTick;
+
         /// <summary>
         /// Node name
         /// </summary>
@@ -15,7 +15,10 @@ namespace Splatter.AI.BehaviourTree {
         /// </summary>
         protected BehaviourTree Tree { get; private set; }
 
-        public event EventHandler<NodeResult> OnNodeExecuted;
+#if UNITY_EDITOR
+        public bool ExecutedLastTick => Tree.Ticks == lastExecutedTick + 1;
+        public NodeResult LastResult { get; private set; }
+#endif
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Node"/> class.
@@ -34,7 +37,8 @@ namespace Splatter.AI.BehaviourTree {
         public NodeResult Execute() {
             var result = ExecuteNode();
 
-            OnNodeExecuted?.Invoke(this, result);
+            lastExecutedTick = Tree.Ticks;
+            LastResult = result;
 
             return result;
         }
