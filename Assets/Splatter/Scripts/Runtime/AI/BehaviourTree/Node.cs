@@ -3,7 +3,9 @@ namespace Splatter.AI.BehaviourTree {
     /// Base class for all nodes on a behaviour tree.
     /// </summary>
     public abstract class Node {
+#if UNITY_EDITOR
         private int lastExecutedTick;
+#endif
 
         /// <summary>
         /// Node name
@@ -37,8 +39,10 @@ namespace Splatter.AI.BehaviourTree {
         public NodeResult Execute() {
             var result = ExecuteNode();
 
+#if UNITY_EDITOR
             lastExecutedTick = Tree.Ticks;
             LastResult = result;
+#endif
 
             return result;
         }

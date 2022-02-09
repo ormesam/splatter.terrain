@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿#if UNITY_EDITOR
+using System.Linq;
 using Splatter.TerrainTools.AutoPainter;
 using UnityEditor;
 using UnityEngine;
@@ -229,3 +230,4 @@ namespace SplatterEditor.Splat {
         }
     }
 }
+#endif

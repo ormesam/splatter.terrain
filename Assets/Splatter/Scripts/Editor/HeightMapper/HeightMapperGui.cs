@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+using UnityEditor;
 using UnityEngine;
 using HeightMapperUtil = Splatter.TerrainTools.HeightMapper.HeightMapper;
 
@@ -29,3 +30,4 @@ namespace SplatterEditor.HeightMapper {
         }
     }
 }
+#endif
